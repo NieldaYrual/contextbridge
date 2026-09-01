@@ -231,3 +231,6 @@ secrets/
 
 # Local tool settings
 .claude/
+
+# Local-only launch material (not for the public repo)
+docs/launch-posts.md
