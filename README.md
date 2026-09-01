@@ -85,6 +85,7 @@ I'd love contributions in the following areas.
 
 - [ ] Consolidate env var naming (`SUPABASE_SERVICE_KEY` vs `SB_SERVICE_ROLE` vs `SUPABASE_SERVICE_ROLE_KEY` are all read in different places)
 - [ ] MS Edge / Firefox / Safari support for the extension
+- [ ] Keep the [ctxbridge.io](https://www.ctxbridge.io) site (frontend under `packages/website`) up to date as new features ship
 
 **Features & fixes:**
 
