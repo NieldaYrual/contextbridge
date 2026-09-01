@@ -79,13 +79,24 @@ pnpm --filter contextbridge-chrome-extension build   # build the extension into 
 
 This project is being opened up from a working private prototype. It runs, it's used daily, and it has rough edges — that's exactly where you come in.
 
-<!-- TODO(Daniel): 5–8 bullets in your own words. What works well today, what's
-     half-finished, and where you'd love contributions. E.g.:
-     - [ ] Firefox/Safari support for the extension
-     - [ ] Consolidate env var naming (SUPABASE_SERVICE_KEY vs SB_SERVICE_ROLE vs SUPABASE_SERVICE_ROLE_KEY)
-     - [ ] Support Gemini / other chat platforms
-     - [ ] Local-first mode (Ollama embeddings, no cloud keys)
-     - ...your actual vision here — this section is the pitch to contributors. -->
+I'd love contributions in the following areas.
+
+**Good first issues** — self-contained, a great way in:
+
+- [ ] Consolidate env var naming (`SUPABASE_SERVICE_KEY` vs `SB_SERVICE_ROLE` vs `SUPABASE_SERVICE_ROLE_KEY` are all read in different places)
+- [ ] MS Edge / Firefox / Safari support for the extension
+
+**Features & fixes:**
+
+- [ ] Local-first mode — Ollama embeddings, no cloud keys required
+- [ ] Fix auto-context selection — resolve the token-budget issue, add a launch-on-demand mode, verify the disable toggle actually works, and enrich replies with better context
+- [ ] Improve memory retrieval — time-based (last-in-first-out) recall, better location of specific tidbits in past conversations, and higher-accuracy document retrieval (code, code blocks, Markdown, Word, Excel) that pinpoints the exact passage needed rather than the whole file
+- [ ] Make a Claude Code and OpenAI Codex version
+- [ ] Add local folders and personal repos as context sources for chat models (Dropbox, Box, OneNote, etc.)
+
+**Bigger picture:**
+
+- [ ] ContextBridge was built for coding, but the same idea is just as useful for other professions — legal, finance, real estate, and more. Adapters, prompts, and domain-specific retrieval for these are wide open.
 
 ## Contributing
 
