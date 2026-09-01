@@ -35,7 +35,7 @@
     "ollama": "^0.5.18",
     "openai": "^4.104.0",
     "p-limit": "^7.3.0",
-    "pdfjs-dist": "^5.6.205",
+    "pdfjs-dist": "^6.2.108",
     "secretlint": "^12.3.1",
     "tiktoken": "^1.0.22",
     "tree-sitter-go": "^0.25.0",
