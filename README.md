@@ -98,6 +98,8 @@ I'd love contributions in the following areas.
 
 - [ ] ContextBridge was built for coding, but the same idea is just as useful for other professions — legal, finance, real estate, and more. Adapters, prompts, and domain-specific retrieval for these are wide open.
 
+And beyond this list: if you can think of anything that would make ContextBridge more useful to a wider range of people, propose it — open an issue to start the conversation. This roadmap is a starting point, not a boundary.
+
 ## Contributing
 
 Issues and PRs welcome. Check the [good first issue](https://github.com/NieldaYrual/contextbridge/labels/good%20first%20issue) label for approachable entry points, and see [CONTRIBUTING.md](./CONTRIBUTING.md) for how to get a dev environment running and what to expect from review.
