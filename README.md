@@ -4,7 +4,22 @@
 
 Every AI chat starts from zero. ContextBridge fixes that: a Chrome extension captures your conversations on Claude.ai and ChatGPT, a backend builds a knowledge graph and semantic index over them, and when you start a new conversation, precisely the right context gets injected — regardless of which platform you're on.
 
-<!-- TODO: demo GIF here — 10s of capture → new chat → injection. This single asset does more than everything below it. -->
+<!--
+  DEMO GIF — drop the file at docs/demo.gif, then uncomment the two lines below.
+  Kept commented so the public README shows no broken image until the file exists.
+
+<p align="center">
+  <img src="docs/demo.gif" alt="ContextBridge: capturing a conversation, then a new chat auto-loading the relevant context" width="720">
+</p>
+
+-->
+<!-- Shot list for the recording (aim for 8–12s, loops cleanly):
+     1. A finished Claude.ai/ChatGPT chat — the ContextBridge widget shows it was captured.
+     2. Open a brand-new chat on the OTHER platform (show cross-platform).
+     3. Type a question that depends on the earlier chat's context.
+     4. The relevant prior context is injected; the model answers correctly.
+     Record at ~1280px wide, then downscale; keep it under ~5 MB so it loads fast. -->
+
 
 ## How it works
 
