@@ -106,7 +106,7 @@
         <h2>Hybrid retrieval architecture</h2>
       </div>
       <p class="feature-section-lead">
-        ContextBridge does not rely on a single retrieval method. It combines proprietary semantic vector search, BM25 keyword matching, and entity detection, fusing results using Reciprocal Rank Fusion (RRF) for more accurate and robust retrieval than any single method alone.
+        ContextBridge does not rely on a single retrieval method. It combines semantic vector search, BM25 keyword matching, and entity detection, fusing results using Reciprocal Rank Fusion (RRF) for more accurate and robust retrieval than any single method alone. It's all open source — read the implementation on <a href="https://github.com/NieldaYrual/contextbridge">GitHub</a>.
       </p>
       <div class="feature-tech-grid">
         <div class="feature-tech-card">
@@ -115,7 +115,7 @@
         </div>
         <div class="feature-tech-card">
           <h4>BM25 keyword search</h4>
-          <p>PostgreSQL full-text search with GIN indexes provides BM25-style keyword matching. This excels on precise terms — function names, error codes, identifiers — where semantic embeddings can be too diffuse. A proprietary normalization step prepares scores for fusion.</p>
+          <p>PostgreSQL full-text search with GIN indexes provides BM25-style keyword matching. This excels on precise terms — function names, error codes, identifiers — where semantic embeddings can be too diffuse. A custom normalization step prepares scores for fusion.</p>
         </div>
         <div class="feature-tech-card">
           <h4>Reciprocal Rank Fusion (RRF)</h4>
@@ -123,7 +123,7 @@
         </div>
         <div class="feature-tech-card">
           <h4>Retrieval quality controls</h4>
-          <p>ContextBridge applies proprietary post-processing to eliminate common retrieval artifacts — including score inflation from indirect associations — ensuring results reflect genuine relevance rather than coincidental co-occurrence. Contact <a href="/cdn-cgi/l/email-protection#c4adaaa2ab84a7b0bca6b6ada0a3a1eaadab" class="feature-dev-link"><span class="__cf_email__" data-cfemail="c7aea9a1a887a4b3bfa5b5aea3a0a2e9aea8">[email&#160;protected]</span></a> for details.</p>
+          <p>ContextBridge applies custom post-processing to eliminate common retrieval artifacts — including score inflation from indirect associations — ensuring results reflect genuine relevance rather than coincidental co-occurrence. See the <a href="https://github.com/NieldaYrual/contextbridge" class="feature-dev-link">source on GitHub</a> for details.</p>
         </div>
       </div>
     </div>
