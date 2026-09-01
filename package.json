@@ -1,0 +1,33 @@
+{
+  "name": "contextbridge",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm -r --parallel run dev",
+    "build": "pnpm -r run build",
+    "backend": "pnpm --filter backend dev",
+    "extension": "pnpm --filter extension dev",
+    "setup": "pnpm install && pnpm -r run setup"
+  },
+  "pnpm": {
+    "overrides": {
+      "ws@<8.17.1": "8.17.1",
+      "tar-fs@<3.0.6": "3.0.6",
+      "uuid@<9.0.1": "9.0.1"
+    }
+  },
+  "dependencies": {
+    "node-fetch": "^2.7.0",
+    "undici": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.39",
+    "dotenv": "^17.4.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

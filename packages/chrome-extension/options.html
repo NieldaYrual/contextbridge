@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ContextBridge Settings</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 20px;
+      max-width: 500px;
+      margin: 0 auto;
+      background: #f5f5f5;
+    }
+    h1 {
+      color: #333;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #333;
+      font-size: 16px;
+      margin: 20px 0 10px 0;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      border-bottom: 2px solid #ddd;
+      margin-bottom: 20px;
+    }
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-size: 14px;
+      color: #666;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .tab:hover {
+      color: #333;
+    }
+    .tab.active {
+      color: #4F46E5;
+      border-bottom-color: #4F46E5;
+      font-weight: 500;
+    }
+
+    /* Forms */
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #555;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    input:focus {
+      outline: none;
+      border-color: #4F46E5;
+    }
+
+    /* Buttons */
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button.primary {
+      background: #4F46E5;
+      color: white;
+      width: 100%;
+    }
+    button.primary:hover {
+      background: #4338CA;
+    }
+    button.primary:disabled {
+      background: #9CA3AF;
+      cursor: not-allowed;
+    }
+    button.secondary {
+      background: #e0e0e0;
+      color: #333;
+    }
+    button.secondary:hover {
+      background: #d0d0d0;
+    }
+    button.logout {
+      background: #3B82F6;
+      color: white;
+    }
+    button.logout:hover {
+      background: #2563EB;
+    }
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    /* Status messages */
+    .status {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 4px;
+      display: none;
+      font-size: 14px;
+    }
+    .status.success {
+      display: block;
+      background: #D1FAE5;
+      color: #065F46;
+    }
+    .status.error {
+      display: block;
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+    .status.info {
+      display: block;
+      background: #DBEAFE;
+      color: #1E40AF;
+    }
+
+    /* Sections */
+    .section {
+      display: none;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .section.active {
+      display: block;
+    }
+
+    /* User info card */
+    .user-card {
+      background: #F3F4F6;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .user-card .email {
+      font-weight: 600;
+      color: #333;
+    }
+    .user-card .name {
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* Settings section */
+    .settings-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .settings-row:last-child {
+      border-bottom: none;
+    }
+
+    /* Help text */
+    .help-text {
+      font-size: 12px;
+      color: #777;
+      margin-top: 5px;
+    }
+    .help-text.mt-15 {
+      margin-top: 15px;
+    }
+    .help-text.mb-15 {
+      margin-bottom: 15px;
+    }
+    .link {
+      color: #4F46E5;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .link:hover {
+      text-decoration: underline;
+    }
+
+    /* Presets */
+    .presets {
+      margin-top: 10px;
+    }
+    .presets button {
+      padding: 5px 10px;
+      font-size: 12px;
+      margin-right: 5px;
+    }
+
+    /* Loading spinner */
+    .loading {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 0.8s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Hidden elements */
+    .hidden {
+      display: none;
+    }
+
+    /* Divider */
+    .divider {
+      margin: 30px 0;
+      border: none;
+      border-top: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔗 ContextBridge Settings</h1>
+
+  <!-- Auth Section (shown when logged out) -->
+  <div id="authSection" class="section">
+    <div class="tabs">
+      <button class="tab active" data-tab="login">Login</button>
+      <button class="tab" data-tab="register">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm">
+      <div class="form-group">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Your password">
+      </div>
+      <button class="primary" id="loginBtn">Login</button>
+      <p class="help-text mt-15">
+        <span class="link" id="forgotPasswordLink">Forgot password?</span>
+      </p>
+    </div>
+
+    <!-- Resend Verification Form -->
+    <div id="resendVerificationForm" class="hidden">
+      <p class="help-text mb-15">Your email is not verified. Check your inbox (and spam folder) for the verification link, or request a new one.</p>
+      <div class="form-group">
+        <label for="resendEmail">Email</label>
+        <input type="email" id="resendEmail" placeholder="you@example.com">
+      </div>
+      <button class="primary" id="resendBtn">Resend Verification Email</button>
+      <p class="help-text mt-15">
+        <span class="link" id="backToLoginFromResend">Back to login</span>
+      </p>
+    </div>
+
+    <!-- Register Form -->
+    <div id="registerForm" class="hidden">
+      <div class="form-group">
+        <label for="registerName">Name</label>
+        <input type="text" id="registerName" placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label for="registerEmail">Email</label>
+        <input type="email" id="registerEmail" placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label for="registerPassword">Password</label>
+        <input type="password" id="registerPassword" placeholder="At least 8 characters">
+      </div>
+      <button class="primary" id="registerBtn">Create Account</button>
+    </div>
+
+    <!-- Forgot Password Form -->
+    <div id="forgotPasswordForm" class="hidden">
+      <p class="help-text mb-15">Enter your email and we'll send you a reset link.</p>
+      <div class="form-group">
+        <label for="forgotEmail">Email</label>
+        <input type="email" id="forgotEmail" placeholder="you@example.com">
+      </div>
+      <button class="primary" id="sendResetBtn">Send Reset Link</button>
+      <p class="help-text mt-15">
+        <span class="link" id="backToLoginLink">Back to login</span>
+      </p>
+    </div>
+
+    <div class="status" id="authStatus"></div>
+  </div>
+
+  <!-- Logged In Section (shown when authenticated) -->
+  <div id="loggedInSection" class="section">
+    <div class="user-card">
+      <div class="email" id="userEmail">user@example.com</div>
+      <div class="name" id="userName">User Name</div>
+    </div>
+
+    <p class="help-text">You're connected to ContextBridge. <br> Your conversations are being captured automatically.</p>
+
+    <div class="status" id="settingsStatus"></div>
+
+    <button class="logout" id="logoutBtn">Logout</button>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

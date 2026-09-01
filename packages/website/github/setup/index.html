@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17943315500"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17943315500');
+    gtag('config', 'G-MFJSRGFTY5');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connecting GitHub — ContextBridge</title>
+  <meta name="description" content="Finalize your GitHub connection with ContextBridge.">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="icon" href="../../logo.svg" type="image/svg+xml">
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="nav-logo">
+      <img src="../../logo.svg" alt="ContextBridge" width="32" height="32">
+      <span>ContextBridge</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/how-to-use">How to Use</a>
+      <a href="/privacy">Privacy</a>
+    </div>
+  </nav>
+
+  <section class="feature-hero">
+    <h1 id="title">Connecting GitHub…</h1>
+    <p class="feature-hero-subtitle" id="subtitle">Hold tight while we finish the setup.</p>
+  </section>
+
+  <section class="feature-section">
+    <div class="feature-section-inner" style="text-align:center;">
+      <div id="status" style="margin: 2rem auto; max-width: 600px;">
+        <p style="color: #888;">Verifying your installation…</p>
+      </div>
+      <div id="actions" style="margin-top: 2rem;"></div>
+    </div>
+  </section>
+
+  <script>
+  (async function () {
+    const API_BASE = 'https://api.ctxbridge.io';
+    const EXTENSION_ID = 'elppikbikcmchiaoghbbhlhaibeflopb';
+
+    const params = new URLSearchParams(window.location.search);
+    const installationId = params.get('installation_id');
+    const setupAction = params.get('setup_action') || 'install';
+
+    const titleEl = document.getElementById('title');
+    const subtitleEl = document.getElementById('subtitle');
+    const statusEl = document.getElementById('status');
+    const actionsEl = document.getElementById('actions');
+
+    function render(state, opts) {
+      opts = opts || {};
+      if (state === 'no_extension') {
+        titleEl.textContent = 'Chrome extension required';
+        subtitleEl.textContent = 'ContextBridge uses its Chrome extension for authentication.';
+        statusEl.innerHTML = '<p style="color:#888;">Install the extension, sign in on any AI platform, then revisit this page.</p>';
+        actionsEl.innerHTML =
+          '<a href="https://chromewebstore.google.com/detail/contextbridge/' + EXTENSION_ID + '" target="_blank" class="btn btn-primary">Install extension</a>';
+      } else if (state === 'not_logged_in') {
+        titleEl.textContent = 'Sign in to finish connecting';
+        subtitleEl.textContent = 'The ContextBridge extension is installed, but you are not signed in.';
+        statusEl.innerHTML = '<p style="color:#888;">Open any supported AI platform (Claude, ChatGPT, etc.), sign in via the extension, then refresh this page.</p>';
+        actionsEl.innerHTML =
+          '<button onclick="location.reload()" class="btn btn-primary">Refresh</button>';
+      } else if (state === 'success') {
+        titleEl.textContent = 'GitHub connected ✓';
+        subtitleEl.textContent = 'Linked to ' + (opts.account || 'your account') + '.';
+        statusEl.innerHTML = '<p>You can manage which repositories are synced from your dashboard. (Repo selection UI coming soon.)</p>';
+        actionsEl.innerHTML = '<a href="/" class="btn btn-primary">Back to home</a>';
+      } else if (state === 'error') {
+        titleEl.textContent = 'Setup failed';
+        subtitleEl.textContent = opts.message || 'We could not finish linking your installation.';
+        statusEl.innerHTML = '<p style="color:#888;">You can try again from the GitHub App page, or contact support.</p>';
+        actionsEl.innerHTML = '<a href="/" class="btn btn-secondary">Back to home</a>';
+      }
+    }
+
+    // --- Guard: missing installation_id ---
+    if (!installationId) {
+      render('error', { message: 'Missing installation_id in the URL. This page only works as the redirect target after a GitHub install.' });
+      return;
+    }
+
+    // --- Step 1: Get token from extension ---
+    var token = null;
+
+    if (typeof chrome === 'undefined' || !chrome.runtime || !chrome.runtime.sendMessage) {
+      render('no_extension');
+      return;
+    }
+
+    try {
+      var extResponse = await chrome.runtime.sendMessage(EXTENSION_ID, { action: 'GET_AUTH_TOKEN' });
+
+      if (!extResponse || !extResponse.success) {
+        render('not_logged_in');
+        return;
+      }
+
+      token = extResponse.accessToken;
+    } catch (err) {
+      // sendMessage throws if extension is not installed or not connectable
+      console.warn('[github setup] extension message failed:', err);
+      render('no_extension');
+      return;
+    }
+
+    // --- Step 2: Call setup endpoint ---
+    try {
+      var res = await fetch(API_BASE + '/api/github/setup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+        },
+        body: JSON.stringify({
+          installation_id: Number(installationId),
+          setup_action: setupAction,
+        }),
+      });
+
+      if (res.status === 401) {
+        render('not_logged_in');
+        return;
+      }
+
+      if (!res.ok) {
+        var body = await res.json().catch(function () { return {}; });
+        render('error', { message: body.error || ('Setup returned ' + res.status + '.') });
+        return;
+      }
+
+      var body = await res.json();
+      render('success', { account: body.account_login });
+    } catch (err) {
+      console.error('[github setup] request failed:', err);
+      render('error', { message: 'Network error while contacting the server.' });
+    }
+  })();
+</script>
+</body>
+</html>

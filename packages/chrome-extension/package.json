@@ -1,0 +1,19 @@
+{
+  "name": "contextbridge-chrome-extension",
+  "version": "1.0.1",
+  "description": "ContextBridge Chrome Extension - Capture and inject context for AI conversations",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "build:prod": "node build.js --production",
+    "clean": "rimraf dist",
+    "package": "node build.js --production && cd dist && bestzip ../contextbridge-chrome-v$npm_package_version.zip *"
+  },
+  "devDependencies": {
+    "bestzip": "^2.2.3",
+    "rimraf": "^5.0.10",
+    "terser": "^5.46.2"
+  },
+  "author": "ContextBridge",
+  "license": "MIT"
+}

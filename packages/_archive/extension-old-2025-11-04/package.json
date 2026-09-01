@@ -1,0 +1,13 @@
+{
+  "name": "extension",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "echo 'No build needed - load extension directly in Chrome'",
+    "build": "echo 'No build needed - load extension directly in Chrome'",
+    "clean": "echo 'No dist folder to clean'"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.254"
+  }
+}

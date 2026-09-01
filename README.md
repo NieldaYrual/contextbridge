@@ -1,0 +1,96 @@
+# ContextBridge
+
+> **Conversation memory for LLMs** — capture, store, and intelligently re-inject context across AI conversations and platforms.
+
+Every AI chat starts from zero. ContextBridge fixes that: a Chrome extension captures your conversations on Claude.ai and ChatGPT, a backend builds a knowledge graph and semantic index over them, and when you start a new conversation, precisely the right context gets injected — regardless of which platform you're on.
+
+<!-- TODO: demo GIF here — 10s of capture → new chat → injection. This single asset does more than everything below it. -->
+
+## How it works
+
+```
+┌──────────────────┐     ┌─────────────────────┐     ┌──────────────────┐
+│ Chrome extension  │────▶│  Backend (Express)  │────▶│    Supabase      │
+│ capture/injection │     │  extraction,        │     │  conversations,  │
+│ on Claude/ChatGPT │◀────│  summarization,     │◀────│  entities,       │
+└──────────────────┘     │  semantic search    │     │  embeddings      │
+┌──────────────────┐     └─────────────────────┘     └──────────────────┘
+│ VS Code extension │────▶ syncs local code context
+│    ("Codex")      │      into the same store
+└──────────────────┘
+```
+
+1. **Capture** — the Chrome extension observes your Claude.ai / ChatGPT sessions and ships each conversation to the backend.
+2. **Understand** — the backend extracts entities and concepts, links related conversations, generates summaries, and embeds everything for semantic search (OpenAI embeddings + Anthropic/Ollama for extraction).
+3. **Retrieve & inject** — when you start a new conversation, the extension asks the backend for the most relevant context and injects it into your prompt.
+
+## Repository layout
+
+| Package | What it is |
+|---|---|
+| `packages/backend` | Node.js/Express API — capture ingestion, entity extraction, knowledge graph, semantic search |
+| `packages/chrome-extension` | The capture/injection extension (Manifest V3, plain JS) |
+| `packages/vscode-extension` | "Codex" — syncs local code context into ContextBridge |
+| `packages/shared` | Shared utilities (retry-fetch, etc.) |
+| `packages/scraper` | Puppeteer-based scraping workers (Bull/Redis queues) |
+| `packages/capture` | Standalone capture tooling |
+| `packages/website` | Landing page / docs site (static) |
+| `supabase/` | Database migrations and edge functions |
+
+## Quick start
+
+**Prerequisites:** Node 20+, [pnpm](https://pnpm.io) 10+, a [Supabase](https://supabase.com) project (free tier works, or `supabase start` locally), an OpenAI API key (embeddings) and an Anthropic API key (extraction/summarization). Redis is only needed for the scraper queues — you can skip it at first.
+
+```bash
+git clone https://github.com/NieldaYrual/contextbridge.git
+cd contextbridge
+pnpm install
+
+# Configure the backend
+cp .env.example packages/backend/.env
+#   → fill in SUPABASE_URL, SUPABASE_SERVICE_KEY, OPENAI_API_KEY, ANTHROPIC_API_KEY
+
+# Apply database migrations to your Supabase project
+supabase db push        # or run supabase/migrations/*.sql in the SQL editor
+
+# Start the backend (http://localhost:3000)
+pnpm backend
+```
+
+**Load the Chrome extension:**
+
+1. Open `chrome://extensions`, enable **Developer mode**
+2. **Load unpacked** → select `packages/chrome-extension`
+3. Open the extension options and point it at your backend URL
+4. Visit claude.ai or chatgpt.com and have a conversation — it should appear in your Supabase `conversations` table
+
+All env vars (required and optional) are documented in [`.env.example`](./.env.example).
+
+## Development
+
+```bash
+pnpm dev          # run all packages in parallel watch mode
+pnpm backend      # backend only (tsx watch)
+pnpm build        # build everything
+pnpm --filter contextbridge-chrome-extension build   # build the extension into dist/
+```
+
+## Status & roadmap
+
+This project is being opened up from a working private prototype. It runs, it's used daily, and it has rough edges — that's exactly where you come in.
+
+<!-- TODO(Daniel): 5–8 bullets in your own words. What works well today, what's
+     half-finished, and where you'd love contributions. E.g.:
+     - [ ] Firefox/Safari support for the extension
+     - [ ] Consolidate env var naming (SUPABASE_SERVICE_KEY vs SB_SERVICE_ROLE vs SUPABASE_SERVICE_ROLE_KEY)
+     - [ ] Support Gemini / other chat platforms
+     - [ ] Local-first mode (Ollama embeddings, no cloud keys)
+     - ...your actual vision here — this section is the pitch to contributors. -->
+
+## Contributing
+
+Issues and PRs welcome. Check the [good first issue](https://github.com/NieldaYrual/contextbridge/labels/good%20first%20issue) label for approachable entry points, and see [CONTRIBUTING.md](./CONTRIBUTING.md) for how to get a dev environment running and what to expect from review.
+
+## License
+
+[MIT](./LICENSE) — do whatever you want with it; a link back is appreciated.

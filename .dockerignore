@@ -1,0 +1,44 @@
+# Dependencies (will be installed in container)
+node_modules
+**/node_modules
+
+# Build outputs (will be built in container)
+dist
+**/dist
+
+# Development files
+.env
+.env.*
+*.log
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+*.test.ts
+*.spec.ts
+__tests__
+coverage
+
+# Packages not needed for backend
+packages/chrome-extension
+packages/vscode-extension
+packages/capture
+packages/scraper
+packages/codex
+packages/_archive
+
+# Other
+README.md
+*.md
+.cb-profiles
+captures

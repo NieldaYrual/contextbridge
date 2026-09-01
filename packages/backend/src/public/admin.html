@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - ContextBridge</title>
+  <style>
+    :root {
+      --color-bg:            #0A0A0B;
+      --color-bg-elevated:   #141415;
+      --color-bg-hover:      #1C1C1E;
+      --color-border:        #27272A;
+      --color-border-hover:  #3F3F46;
+      --color-text:          #FAFAFA;
+      --color-text-muted:    #A1A1AA;
+      --color-text-subtle:   #71717A;
+      --color-primary:       #8B5CF6;
+      --color-primary-hover: #A78BFA;
+      --color-primary-glow:  rgba(139, 92, 246, 0.15);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    .hidden { display: none !important; }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--color-bg-elevated);
+      border-bottom: 1px solid var(--color-border);
+      padding: 0 24px;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-brand-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .header-brand-sep {
+      width: 1px;
+      height: 18px;
+      background: var(--color-border-hover);
+      margin: 0 4px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header h1 {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--color-text-muted);
+    }
+
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 6px 10px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-bg-hover);
+      transition: all 0.2s;
+    }
+
+    .back-link:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: var(--color-text-muted);
+    }
+
+    /* ── CONTAINER ── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 24px;
+    }
+
+    /* ── STAT CARDS ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      transition: border-color 0.2s;
+    }
+
+    .stat-card:hover { border-color: var(--color-border-hover); }
+
+    .stat-card .label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-text-subtle);
+      margin-bottom: 6px;
+    }
+
+    .stat-card .value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--color-text);
+      line-height: 1;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    /* ── USER TABLE ── */
+    .user-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .user-table th,
+    .user-table td {
+      padding: 13px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .user-table th {
+      background: var(--color-bg);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-text-subtle);
+    }
+
+    .user-row { cursor: pointer; }
+
+    .user-row:hover { background: var(--color-bg-hover); }
+
+    .expand-icon {
+      display: inline-block;
+      width: 20px;
+      color: var(--color-text-subtle);
+      font-size: 11px;
+      transition: transform 0.2s;
+    }
+
+    .expand-icon.expanded { transform: rotate(90deg); }
+
+    /* ── BADGES ── */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .badge-verified   { background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3); }
+    .badge-unverified { background: rgba(239,68,68,0.15);  color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+    .badge-admin      { background: var(--color-primary-glow); color: var(--color-primary-hover); border: 1px solid rgba(139,92,246,0.3); }
+
+    /* ── PROJECTS ROW ── */
+    .projects-row { display: none; }
+    .projects-row.visible { display: table-row; }
+
+    .projects-row td {
+      padding: 0;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .projects-container {
+      padding: 14px 20px 14px 46px;
+    }
+
+    .projects-container h4 {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-text-subtle);
+      margin-bottom: 10px;
+    }
+
+    .project-list { display: grid; gap: 8px; }
+
+    .project-card {
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: 16px;
+      align-items: center;
+      transition: border-color 0.2s;
+    }
+
+    .project-card:hover { border-color: var(--color-border-hover); }
+
+    .project-card .project-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .project-card .project-id {
+      font-size: 10px;
+      color: var(--color-text-subtle);
+      font-family: ui-monospace, monospace;
+      margin-top: 2px;
+    }
+
+    .project-card .project-meta {
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+
+    /* ── LOADING / ERROR ── */
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 60px;
+      color: var(--color-text-muted);
+      font-size: 14px;
+    }
+
+    .spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid var(--color-border);
+      border-top-color: var(--color-primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .error-message {
+      background: rgba(239,68,68,0.1);
+      color: #ef4444;
+      border: 1px solid rgba(239,68,68,0.3);
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      text-align: center;
+      margin: 20px;
+    }
+
+    .no-projects {
+      color: var(--color-text-subtle);
+      font-style: italic;
+      font-size: 13px;
+      padding: 8px 0;
+    }
+
+    /* ── SCROLLBARS ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--color-border-hover); border-radius: 9999px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-content">
+      <div class="header-brand">
+        <img src="/logo.svg" alt="ContextBridge">
+        <span class="header-brand-name">ContextBridge</span>
+        <span class="header-brand-sep"></span>
+        <h1>Admin Panel</h1>
+      </div>
+      <div class="header-actions">
+        <a href="/project-dashboard" class="back-link">← Dashboard</a>
+        <div class="user-info" id="adminInfo"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      Loading admin data...
+    </div>
+
+  <div id="error" class="error-message hidden"></div>
+
+    <div id="content" class="hidden">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="label">Total Users</div>
+          <div class="value" id="totalUsers">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Verified Users</div>
+          <div class="value" id="verifiedUsers">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Total Projects</div>
+          <div class="value" id="totalProjects">0</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">Registered Users</div>
+        <table class="user-table">
+          <thead>
+            <tr>
+              <th width="30"></th>
+              <th>Email</th>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Projects</th>
+              <th>Registered</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let authToken = null;
+
+    // Get auth token from localStorage (set by dashboard)
+    async function initAuth() {
+      authToken = localStorage.getItem('cb_auth_token');
+      if (!authToken) {
+        showError('Not authenticated. Please log in via the dashboard first.');
+        return false;
+      }
+      // Verify admin status server-side before rendering anything
+      try {
+        const resp = await fetch('/api/admin/users', {
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        if (resp.status === 403 || resp.status === 401) {
+          document.body.innerHTML = '';  // Wipe page immediately
+          window.location.href = '/project-dashboard';
+          return false;
+        }
+      } catch (e) {
+        showError('Unable to verify admin access.');
+        return false;
+      }
+      return true;
+    }
+
+    function showError(message) {
+      document.getElementById('loading').classList.add('hidden');
+      document.getElementById('error').classList.remove('hidden');
+      document.getElementById('error').textContent = message;
+    }
+
+    function showContent() {
+      document.getElementById('loading').classList.add('hidden');
+      document.getElementById('content').classList.remove('hidden');
+    }
+
+    async function fetchWithAuth(url) {
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': `Bearer ${authToken}`
+        }
+      });
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.error || `HTTP ${response.status}`);
+      }
+      return response.json();
+    }
+
+    async function loadUsers() {
+      try {
+        const data = await fetchWithAuth('/api/admin/users');
+        const users = data.users || [];
+
+        // Update stats
+        document.getElementById('totalUsers').textContent = users.length;
+        document.getElementById('verifiedUsers').textContent = users.filter(u => u.email_verified).length;
+        document.getElementById('totalProjects').textContent = users.reduce((sum, u) => sum + (u.project_count || 0), 0);
+
+        // Show current admin
+        const currentAdmin = users.find(u => u.is_admin);
+        if (currentAdmin) {
+          document.getElementById('adminInfo').textContent = `Logged in as: ${currentAdmin.name || currentAdmin.email}`;
+        }
+
+        // Render users table
+        const tbody = document.getElementById('usersTableBody');
+        tbody.innerHTML = '';
+
+        users.forEach((user, index) => {
+          // User row
+          const tr = document.createElement('tr');
+          tr.className = 'user-row';
+          tr.onclick = () => toggleProjects(user.id, index);
+
+          const statusBadges = [];
+          if (user.email_verified) {
+            statusBadges.push('<span class="badge badge-verified">Verified</span>');
+          } else {
+            statusBadges.push('<span class="badge badge-unverified">Unverified</span>');
+          }
+          if (user.is_admin) {
+            statusBadges.push('<span class="badge badge-admin">Admin</span>');
+          }
+
+          tr.innerHTML = `
+            <td><span class="expand-icon" id="icon-${index}">▶</span></td>
+            <td>${escapeHtml(user.email)}</td>
+            <td>${escapeHtml(user.name || '—')}</td>
+            <td>${statusBadges.join(' ')}</td>
+            <td>${user.project_count || 0}</td>
+            <td>${formatDate(user.created_at)}</td>
+          `;
+          tbody.appendChild(tr);
+
+          // Projects row (hidden initially)
+          const projectsTr = document.createElement('tr');
+          projectsTr.className = 'projects-row';
+          projectsTr.id = `projects-${index}`;
+          projectsTr.innerHTML = `
+            <td colspan="6">
+              <div class="projects-container">
+                <h4>Projects</h4>
+                <div class="project-list" id="project-list-${user.id}">
+                  <div class="loading"><div class="spinner"></div> Loading projects...</div>
+                </div>
+              </div>
+            </td>
+          `;
+          tbody.appendChild(projectsTr);
+        });
+
+        showContent();
+      } catch (error) {
+        showError(error.message);
+      }
+    }
+
+    async function toggleProjects(userId, index) {
+      const projectsRow = document.getElementById(`projects-${index}`);
+      const icon = document.getElementById(`icon-${index}`);
+      const isVisible = projectsRow.classList.contains('visible');
+
+      if (isVisible) {
+        projectsRow.classList.remove('visible');
+        icon.classList.remove('expanded');
+      } else {
+        projectsRow.classList.add('visible');
+        icon.classList.add('expanded');
+
+        // Load projects if not already loaded
+        const projectList = document.getElementById(`project-list-${userId}`);
+        if (projectList.querySelector('.loading')) {
+          try {
+            const data = await fetchWithAuth(`/api/admin/users/${userId}/projects`);
+            const projects = data.projects || [];
+
+            if (projects.length === 0) {
+              projectList.innerHTML = '<div class="no-projects">No projects</div>';
+            } else {
+              projectList.innerHTML = projects.map(p => `
+                <div class="project-card">
+                  <div>
+                    <div class="project-name">${escapeHtml(p.name)}</div>
+                    <div class="project-id">${p.id}</div>
+                  </div>
+                  <div class="project-meta">${escapeHtml(p.llm_provider || 'Unknown')}</div>
+                  <div class="project-meta">${p.conversation_count || 0} conversations</div>
+                  <div class="project-meta">${formatDate(p.created_at)}</div>
+                </div>
+              `).join('');
+            }
+          } catch (error) {
+            projectList.innerHTML = `<div class="error-message">${error.message}</div>`;
+          }
+        }
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '—';
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    }
+
+    // Initialize
+    (async function init() {
+      const isAuthed = await initAuth();
+      if (isAuthed) {
+        await loadUsers();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+{
+  "projectGroups": {
+    "contextbridge": {
+      "claude": "0198a07b-7fa1-75e2-8834-ca8a703c3469",
+      "openai": "6ab8e888-6ab8-4888-6ab8-e8886ab8e888"
+    },
+    "material": {
+      "claude": "cc8f42fd-1249-4be2-9d31-e9aba18fc7e0",
+      "openai": "06871839-0687-4839-0687-183906871839"
+    },
+    "transporter": {
+      "claude": "019bbd5a-efa5-77eb-be9b-63f8d7365e00",
+      "openai": "23a479ee-23a4-49ee-23a4-79ee23a479ee"
+    },
+    "realestate": {
+      "claude": "019b8b33-ddf8-70ce-91dc-a771f45ef9b6",
+      "openai": "1becd934-1bec-4934-1bec-d9341becd934"
+    }
+  },
+  "apiBase": "https://api.ctxbridge.io",
+  "queries": [
+    {
+      "query": "where is cb_entities located?",
+      "projectGroup": "contextbridge",
+      "note": "Database table location - should find SQL or migration",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["extract-entities.js"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "cb_search_exact",
+      "projectGroup": "contextbridge",
+      "note": "Exact RPC name",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["supabase-retriever.ts"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "fetchEntitiesForQuery",
+      "projectGroup": "contextbridge",
+      "note": "Exact function name - camelCase",
+      "golden": {
+        "topFile": "context-injection.routes.ts",
+        "mustInclude": ["context-injection.routes.ts"],
+        "mustExclude": ["content-fetcher.ts"],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "Entity extraction",
+      "projectGroup": "contextbridge",
+      "note": "Broad topic search",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["extract-entities.js"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "parse_context_request",
+      "projectGroup": "contextbridge",
+      "note": "Snake_case function/symbol name",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["context-injection.routes.ts"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "hybrid search ranking",
+      "projectGroup": "contextbridge",
+      "note": "Concept search - architecture topic",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["supabase-retriever.ts", "rank-combiner.ts"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "How is search by keyword done?",
+      "projectGroup": "contextbridge",
+      "note": "Natural language architecture question",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["supabase-retriever.ts"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "How authentication is currently handled for API calls?",
+      "projectGroup": "contextbridge",
+      "note": "Architecture question about auth",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["auth.routes.ts", "auth.service.ts"],
+        "mustExclude": ["container-deploy.json"],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "How performMessageSearch is making its request?",
+      "projectGroup": "contextbridge",
+      "note": "Specific function behavior question",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["project-dashboard.html"],
+        "mustExclude": ["backfill-messages.js"],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "Does the response JSON contain keyword and entity arrays with data?",
+      "projectGroup": "contextbridge",
+      "note": "API response structure question",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["supabase-retriever.ts"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "Where is the ctxbridge.io website hosted?",
+      "projectGroup": "contextbridge",
+      "note": "Infrastructure question",
+      "golden": {
+        "topFile": null,
+        "mustInclude": [],
+        "mustExclude": [],
+        "topConversation": "Google ad campaign and web tra..."
+      }
+    },
+    {
+      "query": "error handling middleware",
+      "projectGroup": "contextbridge",
+      "note": "Code pattern search",
+      "golden": {
+        "topFile": null,
+        "mustInclude": [],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "database connection logic",
+      "projectGroup": "contextbridge",
+      "note": "Infrastructure code search",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["supabase.ts"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "contextbridge architecture",
+      "projectGroup": "contextbridge",
+      "note": "High-level architecture overview",
+      "golden": {
+        "topFile": null,
+        "mustInclude": [],
+        "mustExclude": ["cytoscape.min.js"],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "Where is the website code located?",
+      "projectGroup": "contextbridge",
+      "note": "Location question - should not confuse code with codex",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["index.html"],
+        "mustExclude": ["cytoscape.min.js"],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "what did we decide about the database?",
+      "projectGroup": "contextbridge",
+      "note": "Conversation recall - decision search",
+      "golden": {
+        "topFile": null,
+        "mustInclude": [],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "What does the Add to Chrome button currently do?",
+      "projectGroup": "contextbridge",
+      "note": "Feature behavior question",
+      "golden": {
+        "topFile": null,
+        "mustInclude": [],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "show me an example of a fetch call in project-dashboard.html that does include authentication",
+      "projectGroup": "contextbridge",
+      "note": "Specific file + pattern search",
+      "golden": {
+        "topFile": "project-dashboard.html",
+        "mustInclude": ["project-dashboard.html"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "How are content scripts currently structured?",
+      "projectGroup": "contextbridge",
+      "note": "General architecture question",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["content-universal.js"],
+        "mustExclude": ["cytoscape.min.js"],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "What messaging patterns exist between background and content?",
+      "projectGroup": "contextbridge",
+      "note": "Architecture pattern question",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["background.js"],
+        "mustExclude": ["cytoscape.min.js"],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "Where is the component/file that renders SEARCH RESULTS (code files + conversations list)?",
+      "projectGroup": "contextbridge",
+      "note": "UI component location search",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["content-universal.js"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "Where is the component/file that renders the CODE FILES section in the in-browser search modal?",
+      "projectGroup": "contextbridge",
+      "note": "UI component location search - specific section",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["content-universal.js"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "deployment instructions to deploy to AWS Lightsail",
+      "projectGroup": "contextbridge",
+      "note": "DevOps process search",
+      "golden": {
+        "topFile": null,
+        "mustInclude": [],
+        "mustExclude": ["verify-mentions.js"],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "find the click handler in content-universal.js",
+      "projectGroup": "contextbridge",
+      "note": "Filename mention + feature search",
+      "golden": {
+        "topFile": "content-universal.js",
+        "mustInclude": ["content-universal.js"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "Redis",
+      "projectGroup": "material",
+      "note": "Cross-project topic search - Material Assistant",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["api_routes.py"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "In which conversation can I find the Path A Roadmap — Overview?",
+      "projectGroup": "transporter",
+      "note": "Conversation recall - Transporter FSD",
+      "golden": {
+        "topFile": null,
+        "mustInclude": [],
+        "mustExclude": [],
+        "topConversation": "Adapting Alpamayo for end-to-end autonomous driving"
+      }
+    },
+    {
+      "query": "What is the cost of the solar installation proposal for 1970 Jackson Street",
+      "projectGroup": "realestate",
+      "note": "Document data extraction - SF Real Estate",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["1970_Jackson_Solar_Proposal.md"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "In the cash-to-close analysis for the 1977 Pacific property, what is the amount that the clients are pre-approved for?",
+      "projectGroup": "realestate",
+      "note": "Specific document analysis - SF Real Estate",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["1977_Pacific_Ave_Offer_Letter.docx"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "What are the key terms of the offer letter for the 1977 Pacific Ave. property?",
+      "projectGroup": "realestate",
+      "note": "Document content search - SF Real Estate",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["1977_Pacific_Ave_Offer_Letter.docx"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    },
+    {
+      "query": "Is the property at 3620 Clay Street, San Francisco, CA 94118 a fully updated Victorian house?",
+      "projectGroup": "realestate",
+      "note": "Factual question from documents - SF Real Estate",
+      "golden": {
+        "topFile": null,
+        "mustInclude": ["3620_Clay_Street_Seller_Disclosure.pdf"],
+        "mustExclude": [],
+        "topConversation": null
+      }
+    }
+  ]
+}

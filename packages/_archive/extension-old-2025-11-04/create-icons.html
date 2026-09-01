@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Icons</title>
+</head>
+<body>
+  <h3>Right-click each square and "Save image as..." to the icons folder:</h3>
+  
+  <p>Save as icon16.png:</p>
+  <canvas id="icon16" width="16" height="16"></canvas>
+  
+  <p>Save as icon48.png:</p>
+  <canvas id="icon48" width="48" height="48"></canvas>
+  
+  <p>Save as icon128.png:</p>
+  <canvas id="icon128" width="128" height="128"></canvas>
+
+  <script>
+    // Create simple blue square icons
+    function createIcon(canvasId, size) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      
+      // Blue background
+      ctx.fillStyle = '#3b82f6';
+      ctx.fillRect(0, 0, size, size);
+      
+      // White "C" for ContextBridge
+      ctx.fillStyle = 'white';
+      ctx.font = `bold ${size * 0.6}px Arial`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('C', size/2, size/2);
+    }
+    
+    createIcon('icon16', 16);
+    createIcon('icon48', 48);
+    createIcon('icon128', 128);
+  </script>
+</body>
+</html>

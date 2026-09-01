@@ -1,0 +1,84 @@
+{
+  "manifest_version": 3,
+  "name": "ContextBridge - LLM Memory Manager",
+  "version": "0.1.0",
+  "description": "Capture and manage conversation context across LLM sessions",
+
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "cookies",
+    "scripting",
+    "webNavigation"
+  ],
+  
+  "host_permissions": [
+    "https://claude.ai/*",
+    "https://*.claude.ai/*",
+    "https://chat.openai.com/*",
+    "http://localhost:3001/*"
+  ],
+  
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:3001/*",
+      "http://127.0.0.1:3001/*",
+      "http://localhost:3000/*"
+    ]
+  },
+  
+  "background": {
+    "service_worker": "src/background/background.js",
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "id": "claude-content",
+      "matches": [
+        "https://claude.ai/*",
+        "https://*.claude.ai/*",
+        "*://*.openai.com/*",
+        "*://chat.openai.com/*"
+      ],
+      "js": ["src/content/claude.js"],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "id": "dashboard-content",
+      "matches": [
+        "http://localhost:3001/*"
+      ],
+      "js": ["src/content/dashboard-bridge.js"],
+      "run_at": "document_end"
+    },
+    {
+      "id": "openai-content",
+      "matches": ["https://chat.openai.com/*"],
+      "js": ["src/content/openai.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

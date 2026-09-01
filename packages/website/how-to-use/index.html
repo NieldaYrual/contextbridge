@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17943315500"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17943315500');
+    gtag('config', 'G-MFJSRGFTY5');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Use ContextBridge — Setup, Search & Context Injection Guide</title>
+  <meta name="description" content="Get started with ContextBridge in minutes. Install the Chrome extension, connect your AI tools, and learn how to search, summarize, and inject context across ChatGPT, Claude, Gemini and Grok.">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="icon" href="../../logo.svg" type="image/svg+xml">
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="nav-logo">
+      <img src="../../logo.svg" alt="ContextBridge" width="32" height="32">
+      <span>ContextBridge</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/privacy">Privacy</a>
+    </div>
+  </nav>
+
+  <section class="feature-hero">
+    <div class="feature-hero-icon">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 8v4l3 3"/>
+      </svg>
+    </div>
+    <h1>How to Use ContextBridge</h1>
+    <p class="feature-hero-subtitle">From install to context injection — everything you need to get started.</p>
+  </section>
+
+  <!-- STEP 1: INSTALL -->
+  <section class="feature-section">
+    <div class="feature-section-inner">
+      <div class="feature-section-header">
+        <span class="feature-section-label">Step 1</span>
+        <h2>Install the Chrome extension</h2>
+      </div>
+      <p class="feature-section-lead">
+        ContextBridge works as a Chrome extension that sits alongside your AI tools. Installation takes under a minute.
+      </p>
+      <div class="feature-benefits">
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Add to Chrome</h3>
+            <p>Click <strong>Add to Chrome</strong> from the Chrome Web Store and confirm the installation prompt. ContextBridge will appear in your browser's extension area.</p>
+          </div>
+        </div>
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Sign in or create an account</h3>
+            <p>On first launch, you'll be prompted to sign in or register. Your account is what connects the extension to your private, searchable library — no data is stored locally.</p>
+          </div>
+        </div>
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <path d="M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Pin the icon to your toolbar</h3>
+            <p>Click the puzzle icon in Chrome's top-right corner, find ContextBridge in the list, and click the pin icon. This keeps the ContextBridge icon always visible in your toolbar for one-click access.</p>
+          </div>
+        </div>
+      </div>
+      <div class="hero-cta" style="margin-top: 2rem;">
+        <a href="/install/chrome" class="btn btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/>
+          </svg>
+          Add to Chrome
+        </a>
+        <div class="editor-dropdown">
+        <a href="/install/editor" class="btn btn-secondary editor-dropdown-trigger">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v8M8 12h8"/>
+          </svg>
+          Connect your editor
+          <svg class="editor-dropdown-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </a>
+        <div class="editor-dropdown-menu" role="menu">
+          <a href="https://marketplace.visualstudio.com/items?itemName=contextbridge.contextbridge-codex" class="editor-dropdown-item" role="menuitem">
+            <span class="editor-dropdown-item-name">VS Code</span>
+            <span class="editor-dropdown-item-note">Install from Marketplace</span>
+          </a>
+          <a href="https://open-vsx.org/extension/contextbridge/contextbridge-codex" class="editor-dropdown-item" role="menuitem">
+            <span class="editor-dropdown-item-name">Cursor</span>
+            <span class="editor-dropdown-item-note">Install from Open VSX</span>
+          </a>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2: STATUS INDICATORS -->
+  <section class="feature-section feature-section-dark">
+    <div class="feature-section-inner">
+      <div class="feature-section-header">
+        <span class="feature-section-label">Step 2</span>
+        <h2>Understanding the status indicators</h2>
+      </div>
+      <p class="feature-section-lead">
+        Once installed and signed in, ContextBridge shows you exactly what it's doing at all times. There are three places to look.
+      </p>
+      <div class="feature-tech-grid">
+        <div class="feature-tech-card">
+          <h4>The toolbar icon</h4>
+          <p>The ContextBridge icon lives in your Chrome toolbar. Click it at any time to see your current sync status, the platform you're on, the time of your last sync, and to open your Dashboard.</p>
+        </div>
+        <div class="feature-tech-card">
+          <h4>The "ContextBridge Active" pill</h4>
+          <p>When you're on a supported AI platform (Claude.ai, ChatGPT, Gemini, or Grok), a small status badge appears on the page confirming the extension is active and ready to capture.</p>
+        </div>
+        <div class="feature-tech-card">
+          <h4>The composer bar indicator</h4>
+          <p>Inside the AI chat composer, a small ContextBridge indicator appears in the top bar alongside the model name. This confirms the Context Injection Assistant is loaded and ready for use in that session.</p>
+        </div>
+        <div class="feature-tech-card">
+          <h4>Syncing vs. Active</h4>
+          <p>The pill shows <strong>Active</strong> when ContextBridge is connected and monitoring. It shows <strong>Syncing</strong> while a capture is in progress. Both states are normal — Syncing just means your work is being saved.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 3: DASHBOARD -->
+  <section class="feature-section">
+    <div class="feature-section-inner">
+      <div class="feature-section-header">
+        <span class="feature-section-label">Step 3</span>
+        <h2>Your Dashboard</h2>
+      </div>
+      <p class="feature-section-lead">
+        The Dashboard is your central library — everything ContextBridge has captured, organized and searchable in one place. Open it by clicking <strong>Open Dashboard</strong> in the toolbar popup.
+      </p>
+      <div class="feature-benefits">
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Browse and search your library</h3>
+            <p>All captured conversations, code files, and documents appear here, sorted by project and date. Use the search bar to find anything across your entire history — by keyword, meaning, or entity.</p>
+          </div>
+        </div>
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 7h5l2 3H3zM3 14h5l2-3H3z"/><rect x="14" y="5" width="7" height="14" rx="1"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Organize by project</h3>
+            <p>Conversations and files are grouped by project, making it easy to keep client work, research, and personal projects cleanly separated. Switch between projects from the top of the Dashboard.</p>
+          </div>
+        </div>
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 4 23 10 17 10"/>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+            </svg>
+          </div>
+          <div>
+            <h3>If the Dashboard looks stale — refresh</h3>
+            <p>Occasionally your authentication token may expire. If the Dashboard isn't loading your latest data, do a hard refresh (<strong>Cmd+Shift+R</strong> on Mac, <strong>Ctrl+Shift+R</strong> on Windows). The same applies if an AI platform page isn't showing the extension as active.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 4: CONTEXT INJECTION ASSISTANT -->
+  <section class="feature-section feature-section-dark">
+    <div class="feature-section-inner">
+      <div class="feature-section-header">
+        <span class="feature-section-label">Step 4</span>
+        <h2>The Context Injection Assistant</h2>
+      </div>
+      <p class="feature-section-lead">
+        The Context Injection Assistant is ContextBridge's most powerful feature. It lives inside your AI chat window — no tab switching, no copy-pasting. Ask it what you need, and inject the answer directly into your next message.
+      </p>
+      <div class="feature-tech-grid">
+        <div class="feature-tech-card">
+          <h4>Opening the assistant</h4>
+          <p>Click the ContextBridge indicator in the composer bar of any supported AI platform. A panel opens inline — your projects are pre-loaded and ready to search.</p>
+        </div>
+        <div class="feature-tech-card">
+          <h4>Search</h4>
+          <p>Type a natural language query — for example, <em>"Find the auth logic in the user controller"</em> or <em>"Chrome web store publish steps"</em>. Results are ranked across semantic meaning, keywords, and entities, with relevance scores shown for each.</p>
+        </div>
+        <div class="feature-tech-card">
+          <h4>Summarize</h4>
+          <p>Instead of returning raw results, <strong>Summarize</strong> runs an AI pass over your library and returns a synthesized answer based on everything relevant it finds — code files, conversations, and documents combined.</p>
+        </div>
+        <div class="feature-tech-card">
+          <h4>Insert Answer or Insert Results</h4>
+          <p>Once you have what you need, click <strong>Insert Answer</strong> to inject the AI summary directly into the chat composer, or <strong>Insert Results</strong> to insert the raw search results. Both save you from copying and pasting manually.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 5: WAYS TO USE -->
+  <section class="feature-section">
+    <div class="feature-section-inner">
+      <div class="feature-section-header">
+        <span class="feature-section-label">Step 5</span>
+        <h2>Ways to use ContextBridge</h2>
+      </div>
+      <p class="feature-section-lead">
+        There's no single right way to use ContextBridge. Here are the most common patterns depending on how you work.
+      </p>
+      <div class="feature-benefits">
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Developers</h3>
+            <p>Capture architecture decisions, debugging sessions, and code reviews across Claude, ChatGPT, and Gemini. Before starting a new session, inject relevant prior context so your AI already knows your stack, your conventions, and what's been tried before.</p>
+          </div>
+        </div>
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Knowledge workers — lawyers, analysts, consultants</h3>
+            <p>Capture research threads, document summaries, and decision trails. Use the Summarize feature to synthesize findings across multiple sessions before drafting a memo, brief, or report.</p>
+          </div>
+        </div>
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Teams</h3>
+            <p>What one team member figures out, nobody else has to rediscover. Shared projects mean your team's collective AI knowledge — solutions, failed approaches, client context — is always searchable by everyone.</p>
+          </div>
+        </div>
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="M21 21l-4.35-4.35"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Researchers and power users</h3>
+            <p>Run deep searches across months of AI work. Filter by semantic meaning, keywords, or named entities. Use the Dashboard to review the full history of a topic before starting a new thread on any platform.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIPS -->
+  <section class="feature-section feature-section-vision">
+    <div class="feature-section-inner feature-section-inner-narrow">
+      <span class="feature-section-label">Good to know</span>
+      <h2>A few tips for the best experience</h2>
+      <p>
+        ContextBridge only syncs when you choose — nothing is captured in the background without your action. If you ever notice the extension isn't responding or the Dashboard isn't reflecting recent activity, a hard refresh on either the AI platform page or the Dashboard page will re-establish your authentication token and restore normal operation. On Mac, that's <strong>Cmd+Shift+R</strong>. On Windows, <strong>Ctrl+Shift+R</strong>. This is the fix for the vast majority of unexpected behavior.
+      </p>
+    </div>
+  </section>
+
+  <section class="feature-cta">
+    <h2>Ready to stop starting from zero?</h2>
+    <p>Install ContextBridge and bring your AI work with you — every session, every platform.</p>
+    <div class="hero-cta">
+      <a href="/install/chrome" class="btn btn-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/>
+        </svg>
+        Add to Chrome
+      </a>
+      <div class="editor-dropdown">
+        <a href="/install/editor" class="btn btn-secondary editor-dropdown-trigger">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v8M8 12h8"/>
+          </svg>
+          Connect your editor
+          <svg class="editor-dropdown-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </a>
+        <div class="editor-dropdown-menu" role="menu">
+          <a href="https://marketplace.visualstudio.com/items?itemName=contextbridge.contextbridge-codex" class="editor-dropdown-item" role="menuitem">
+            <span class="editor-dropdown-item-name">VS Code</span>
+            <span class="editor-dropdown-item-note">Install from Marketplace</span>
+          </a>
+          <a href="/install/editor#cursor" class="editor-dropdown-item" role="menuitem">
+            <span class="editor-dropdown-item-name">Cursor</span>
+            <span class="editor-dropdown-item-note">Install from Open VSX</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="hiring-bar">
+    We're building the memory layer for AI work. Exceptional talent welcome: <a href="mailto:info@ctxbridge.io">info@ctxbridge.io</a>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="../../logo.svg" alt="ContextBridge" width="24" height="24">
+        <span>ContextBridge</span>
+      </div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/how-to-use">How to Use</a>
+        <a href="/features/capture">Capture Everything</a>
+        <a href="/features/search">Find It Instantly</a>
+        <a href="/features/inject">Reuse With One Click</a>
+        <a href="/install/editor">VS Code / Cursor</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="mailto:info@ctxbridge.io">Contact</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 ContextBridge. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

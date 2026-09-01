@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17943315500"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17943315500');
+    gtag('config', 'G-MFJSRGFTY5');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Install Chrome Extension - ContextBridge</title>
+  <meta name="description" content="Add ContextBridge to Chrome to capture and search your AI conversations.">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <style>
+    .install-page {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+      text-align: center;
+    }
+    .install-page h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .install-page .subtitle {
+      color: var(--color-text-muted);
+      margin-bottom: 2.5rem;
+    }
+    .download-box {
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-primary);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    .download-box h2 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .download-box .btn {
+      margin-bottom: 0.75rem;
+    }
+    .download-box .file-info {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+    .btn-disabled {
+      background: var(--color-border);
+      color: var(--color-text-muted);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.625rem;
+      background: var(--color-primary-glow);
+      border: 1px solid var(--color-primary);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      color: var(--color-primary-hover);
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: var(--color-text);
+    }
+    .note {
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      text-align: left;
+    }
+    .note strong {
+      color: var(--color-text);
+    }
+    .ext-icon {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      background: #4285f4;
+      color: white;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 18px;
+      text-align: center;
+      border-radius: 4px;
+      vertical-align: middle;
+      margin: 0 2px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="nav-logo">
+      <img src="/logo.svg" alt="ContextBridge" width="32" height="32">
+      <span>ContextBridge</span>
+    </a>
+    <div class="nav-links">
+      <a href="/how-to-use">How to Use</a>
+      <a href="/privacy">Privacy</a>
+    </div>
+  </nav>
+
+  <main class="install-page">
+    <a href="/" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back to home
+    </a>
+
+    <h1>Install Chrome Extension</h1>
+    <p class="subtitle">Capture and search your AI conversations</p>
+
+    <div class="download-box">
+      <h2>Chrome Web Store</h2>
+      <a
+        href="https://chromewebstore.google.com/detail/contextbridge/elppikbikcmchiaoghbbhlhaibeflopb"
+        class="btn btn-primary"
+        target="_blank"
+        rel="noopener noreferrer"
+        onclick="gtag('event', 'click_chrome_store', {
+          event_category: 'install',
+          event_label: 'chrome_web_store',
+          destination_url: 'https://chromewebstore.google.com/detail/contextbridge/elppikbikcmchiaoghbbhlhaibeflopb'
+        });"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <circle cx="12" cy="12" r="4"/>
+          <line x1="21.17" y1="8" x2="12" y2="8"/>
+          <line x1="3.95" y1="6.06" x2="8.54" y2="14"/>
+          <line x1="10.88" y1="21.94" x2="15.46" y2="14"/>
+        </svg>
+        Add to Chrome
+      </a>
+      <p class="file-info">One-click install • Auto-updates</p>
+    </div>
+
+    <div class="note">
+      <div class="note">
+        <strong>Quick setup:</strong> After installing, click the extension icon <span class="ext-icon">C</span> to open settings. New users can create an account, or log in if you already have one. Check your spam folder for the verification email. Once logged in, capture your project conversations by clicking on the extension icon.
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="/logo.svg" alt="ContextBridge" width="24" height="24">
+        <span>ContextBridge</span>
+      </div>
+      <div class="footer-links">
+        <a href="/how-to-use">How to Use</a>
+        <a href="/install/editor">VS Code / Cursor</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="mailto:legal@ctxbridge.io">Contact</a>
+      </div>
+      <p class="footer-copy">&copy; 2025 ContextBridge. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

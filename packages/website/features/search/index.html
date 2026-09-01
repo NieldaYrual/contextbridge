@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17943315500"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17943315500');
+    gtag('config', 'G-MFJSRGFTY5');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semantic Search - ContextBridge</title>
+  <meta name="description" content="Find any past AI conversation by meaning, not just keywords. ContextBridge's semantic search understands what you're looking for.">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="icon" href="../../logo.svg" type="image/svg+xml">
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="nav-logo">
+      <img src="../../logo.svg" alt="ContextBridge" width="32" height="32">
+      <span>ContextBridge</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/how-to-use">How to Use</a>
+      <a href="/privacy">Privacy</a>
+    </div>
+  </nav>
+
+  <section class="feature-hero">
+    <div class="feature-hero-icon">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="M21 21l-4.35-4.35"/>
+      </svg>
+    </div>
+    <h1>Semantic Search</h1>
+    <p class="feature-hero-subtitle">Search by keywords, concepts or meaning. Find what you meant, not just what you typed. Retrieve it in Compact Form for resource-minded LLM injection or in User-Friendly mode for detailed explanations.</p>
+  </section>
+
+  <section class="feature-section">
+    <div class="feature-section-inner">
+      <div class="feature-section-header">
+        <span class="feature-section-label">For users</span>
+        <h2>Find the content you need!</h2>
+      </div>
+      <p class="feature-section-lead">
+        You don't always remember the exact words you used. You remember the idea — the problem you were solving, the concept you explored, the solution that clicked. ContextBridge's semantic search understands the meaning behind your query, not just the literal words.
+      </p>
+      <div class="feature-benefits">
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Search by concept, not keyword</h3>
+            <p>Search for "authentication bug in my API" and find conversations that talked about JWT errors, token refresh failures, or OAuth issues — even if those exact words never appeared in your query.</p>
+          </div>
+        </div>
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Search across conversations, code and files</h3>
+            <p>Results span both your saved AI conversations, your synced codebase and files uploaded to or created with your AIs. Find the conversation where you discussed a contract, a disclosure, a research piece, a code function — and the file or function itself — in a single search.</p>
+          </div>
+        </div>
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Instant results</h3>
+            <p>Search happens in seconds across your entire knowledge base. No waiting, no indexing delays — results appear as you type.</p>
+          </div>
+        </div>
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 6h18M3 12h18M3 18h18"/>
+            </svg>
+          </div>
+          <div>
+            <h3>In-page search modal</h3>
+            <p>Access your entire knowledge base without leaving your current AI conversation. The search modal opens directly in the page — find what you need, copy it, and continue without switching tabs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section feature-section-dark">
+    <div class="feature-section-inner">
+      <div class="feature-section-header">
+        <span class="feature-section-label">For developers</span>
+        <h2>Hybrid retrieval architecture</h2>
+      </div>
+      <p class="feature-section-lead">
+        ContextBridge does not rely on a single retrieval method. It combines proprietary semantic vector search, BM25 keyword matching, and entity detection, fusing results using Reciprocal Rank Fusion (RRF) for more accurate and robust retrieval than any single method alone.
+      </p>
+      <div class="feature-tech-grid">
+        <div class="feature-tech-card">
+          <h4>Vector search (pgvector)</h4>
+          <p>Query text is embedded using a 1536-dimension model. Cosine similarity search runs against pre-computed chunk embeddings stored in Supabase. This captures semantic proximity — meaning over exact wording.</p>
+        </div>
+        <div class="feature-tech-card">
+          <h4>BM25 keyword search</h4>
+          <p>PostgreSQL full-text search with GIN indexes provides BM25-style keyword matching. This excels on precise terms — function names, error codes, identifiers — where semantic embeddings can be too diffuse. A proprietary normalization step prepares scores for fusion.</p>
+        </div>
+        <div class="feature-tech-card">
+          <h4>Reciprocal Rank Fusion (RRF)</h4>
+          <p>Vector and keyword result sets are merged using RRF, a rank-based fusion approach robust to score distribution differences between retrieval methods. This consistently outperforms score-weighted approaches in retrieval benchmarks.</p>
+        </div>
+        <div class="feature-tech-card">
+          <h4>Retrieval quality controls</h4>
+          <p>ContextBridge applies proprietary post-processing to eliminate common retrieval artifacts — including score inflation from indirect associations — ensuring results reflect genuine relevance rather than coincidental co-occurrence. Contact <a href="/cdn-cgi/l/email-protection#c4adaaa2ab84a7b0bca6b6ada0a3a1eaadab" class="feature-dev-link"><span class="__cf_email__" data-cfemail="c7aea9a1a887a4b3bfa5b5aea3a0a2e9aea8">[email&#160;protected]</span></a> for details.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section feature-section-vision">
+    <div class="feature-section-inner feature-section-inner-narrow">
+      <span class="feature-section-label">What's ahead</span>
+      <h2>Search that gets sharper over time</h2>
+      <p>
+        The current hybrid approach is already a significant step beyond simple keyword search. The next frontier is search that learns from your usage patterns — understanding which results you actually use, which queries repeatedly fail to find what you meant, and adapting retrieval weights accordingly. Combined with entity-aware intent detection and expanded source coverage, the goal is a search layer precise enough that finding something becomes as natural as remembering it.
+      </p>
+    </div>
+  </section>
+
+  <section class="feature-cta">
+    <h2>Experience smarter search</h2>
+    <p>Install ContextBridge and search your AI conversations by meaning.</p>
+    <div class="hero-cta">
+      <a href="/install/chrome" class="btn btn-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/>
+        </svg>
+        Add to Chrome
+      </a>
+      <div class="editor-dropdown">
+        <a href="/install/editor" class="btn btn-secondary editor-dropdown-trigger">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v8M8 12h8"/>
+          </svg>
+          Connect your editor
+          <svg class="editor-dropdown-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </a>
+        <div class="editor-dropdown-menu" role="menu">
+          <a href="https://marketplace.visualstudio.com/items?itemName=contextbridge.contextbridge-codex" class="editor-dropdown-item" role="menuitem">
+            <span class="editor-dropdown-item-name">VS Code</span>
+            <span class="editor-dropdown-item-note">Install from Marketplace</span>
+          </a>
+          <a href="https://open-vsx.org/extension/contextbridge/contextbridge-codex" class="editor-dropdown-item" role="menuitem">
+            <span class="editor-dropdown-item-name">Cursor</span>
+            <span class="editor-dropdown-item-note">Install from Open VSX</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="hiring-bar">
+    Come and build it with us, hiring exceptional talent: send your resume to <a href="mailto:info@ctxbridge.io">info@ctxbridge.io</a>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="../../logo.svg" alt="ContextBridge" width="24" height="24">
+        <span>ContextBridge</span>
+      </div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/how-to-use">How to Use</a>
+        <a href="/features/capture">Capture Conversations</a>
+        <a href="/features/search">Semantic Search</a>
+        <a href="/features/inject">Context Injection</a>
+        <a href="/install/editor">VS Code / Cursor</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/cdn-cgi/l/email-protection#8ce0e9ebede0c

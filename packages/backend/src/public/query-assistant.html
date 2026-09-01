@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ContextBridge Query Assistant</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 30px;
+    }
+    
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    
+    .query-box {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      margin-bottom: 30px;
+    }
+    
+    .search-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    #queryInput {
+      flex: 1;
+      padding: 15px;
+      font-size: 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      transition: border-color 0.3s;
+    }
+    
+    #queryInput:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    
+    .btn {
+      padding: 15px 30px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .btn:hover {
+      background: #5a67d8;
+    }
+    
+    .btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    
+    .example-queries {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .example-chip {
+      padding: 8px 15px;
+      background: #f5f5f5;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .example-chip:hover {
+      background: #667eea;
+      color: white;
+    }
+    
+    .results-container {
+      display: grid;
+      gap: 20px;
+    }
+    
+    .result-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    
+    .result-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .result-date {
+      color: #666;
+      font-size: 14px;
+    }
+    
+    .result-summary {
+      color: #333;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    
+    .result-meta {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      background: #f5f5f5;
+      border-radius: 5px;
+      font-size: 13px;
+    }
+    
+    .context-preview {
+      background: #f9f9f9;
+      border-left: 4px solid #667eea;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 5px;
+    }
+    
+    .context-preview h4 {
+      margin-bottom: 10px;
+      color: #667eea;
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+    
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      color: #999;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .btn-small {
+      padding: 8px 15px;
+      font-size: 14px;
+    }
+    
+    .btn-secondary {
+      background: #f5f5f5;
+      color: #333;
+    }
+    
+    .btn-secondary:hover {
+      background: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🔍 ContextBridge Query Assistant</h1>
+      <p>Search your conversation history and generate context for Claude</p>
+    </div>
+
+    <div class="query-box">
+      <div class="search-container">
+        <input 
+          type="text" 
+          id="queryInput" 
+          placeholder="What are you looking for? (e.g., 'database architecture decisions', 'CSV processing code')"
+        >
+        <button class="btn" id="searchBtn" onclick="searchConversations()">Search</button>
+      </div>
+      
+      <div class="example-queries">
+        <div class="example-chip" onclick="setQuery('Python CSV processing')">Python CSV processing</div>
+        <div class="example-chip" onclick="setQuery('database decisions')">Database decisions</div>
+        <div class="example-chip" onclick="setQuery('error handling')">Error handling</div>
+        <div class="example-chip" onclick="setQuery('requirements')">Project requirements</div>
+      </div>
+    </div>
+
+    <div id="resultsContainer" class="results-container"></div>
+
+    <!-- Code (Codex) results -->
+    <div id="codexResults" class="results-container"></div>
+  </div>
+
+  <script>
+    let selectedConversations = new Set();
+    let currentProjectId = null;
+
+    // Load project from localStorage or URL params and update header
+    window.onload = async () => {
+      const params = new URLSearchParams(window.location.search);
+      currentProjectId = params.get('project') || localStorage.getItem('currentProject');
+      
+      if (!currentProjectId) {
+        alert('No project selected. Please select a project from the extension.');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/projects/list?_t=' + Date.now());
+        if (!res.ok) {
+          console.error('Failed to fetch projects for header:', res.status);
+          return;
+        }
+
+        const payload = await res.json();
+        // Support both { success, projects } and bare array (just in case)
+        const projects = payload.projects || payload;
+        if (!projects || !Array.isArray(projects)) return;
+
+        const project = projects.find(p => p.id === currentProjectId);
+        if (!project) return;
+
+        const displayName = getAssistantProjectDisplayName(project);
+
+        // Update page title & header text
+        const headerTitle = document.querySelector('.header h1');
+        const headerSubtitle = document.querySelector('.header p');
+
+        if (headerTitle) {
+          headerTitle.textContent = `🔍 ${displayName}`;
+        }
+        if (headerSubtitle) {
+          headerSubtitle.textContent = 'Search your conversation history and generate context for this project';
+        }
+
+        document.title = `${displayName} – ContextBridge Query Assistant`;
+      } catch (err) {
+        console.error('Error loading project for header:', err);
+      }
+    };
+
+    function setQuery(query) {
+      document.getElementById('queryInput').value = query;
+      searchConversations();
+    }
+
+    function getProjectProviderLabel(provider) {
+      if (!provider) return '';
+      const p = provider.toLowerCase();
+
+      if (p === 'claude') return 'ClaudeAI';
+      if (p === 'openai') return 'OpenAI';
+      // future‑proof: gemini, grok, etc.
+      if (p === 'gemini') return 'Gemini';
+      if (p === 'grok') return 'Grok';
+
+      // fallback – capitalize
+      return p.charAt(0).toUpperCase() + p.slice(1);
+    }
+
+    function getAssistantProjectDisplayName(project) {
+      const providerLabel = getProjectProviderLabel(project.provider);
+      return providerLabel ? `${providerLabel}: ${project.name}` : project.name;
+    }
+
+    async function searchConversations() {
+      const query = document.getElementById('queryInput').value;
+      if (!query.trim()) return;
+
+      const resultsContainer = document.getElementById('resultsContainer');
+      resultsContainer.innerHTML = '<div class="loading">Searching...</div>';
+
+      try {
+        const response = await fetch('/api/query/search', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            projectId: currentProjectId,
+            query: query,
+            limit: 10
+          })
+        });
+
+        const data = await response.json();
+
+        const hasConversations = data.success && data.results && data.results.length > 0;
+        const codex = data.codex || [];
+
+        if (hasConversations) {
+          displayResults(data.results);
+        } else {
+          resultsContainer.innerHTML = '<div class="no-results">No conversations found matching your query.</div>';
+        }
+
+        // 🔹 always render Codex results into their own container
+        displayCodexResults(codex);
+      } catch (error) {
+        console.error('Search failed:', error);
+        resultsContainer.innerHTML = '<div class="no-results">Search failed. Please try again.</div>';
+
+        // Clear Codex results on error
+        displayCodexResults([]);
+      }
+    }
+
+    function displayResults(results) {
+      const container = document.getElementById('resultsContainer');
+      container.innerHTML = '';
+
+      results.forEach(conv => {
+        const card = createResultCard(conv);
+        container.appendChild(card);
+      });
+    }
+    
+    function displayCodexResults(codexResults) {
+      const container = document.getElementById('codexResults');
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      if (!codexResults || codexResults.length === 0) {
+        container.innerHTML = '<div class="no-results">No code matches from Codex for this query.</div>';
+        return;
+      }
+
+      const section = document.createElement('div');
+      section.className = 'codex-section';
+
+      const header = document.createElement('h2');
+      header.textContent = 'Code (Codex)';
+      header.className = 'section-title';
+      section.appendChild(header);
+
+      codexResults.forEach((r) => {
+        const card = document.createElement('div');
+        card.className = 'result-card codex-card';
+
+        const title = document.createElement('div');
+        title.className = 'result-title';
+        title.textContent = `${r.filePath}  •  lines ${r.startLine}-${r.endLine}`;
+
+        const snippet = document.createElement('pre');
+        snippet.className = 'result-snippet code-snippet';
+        snippet.textContent = r.snippet;
+
+        const actions = document.createElement('div');
+        actions.className = 'result-actions';
+
+        const injectBtn = document.createElement('button');
+        injectBtn.className = 'btn';
+        injectBtn.textContent = 'Inject as context';
+        injectBtn.onclick = () => injectCodexChunkAsContext(r);
+
+        actions.appendChild(injectBtn);
+
+        card.appendChild(title);
+        card.appendChild(snippet);
+        card.appendChild(actions);
+
+        section.appendChild(card);
+      });
+
+      container.appendChild(section);
+    }
+
+    function buildCodexContextItem(chunk) {
+      return {
+        kind: 'codex',
+        provider: 'codex',
+        projectId: currentProjectId,
+        chunkId: chunk.chunkId,
+        sourceId: chunk.sourceId,
+        artifactId: chunk.artifactId,
+        filePath: chunk.filePath,
+        startLine: chunk.startLine,
+        endLine: chunk.endLine,
+        text: chunk.snippet
+      };
+    }
+
+    async function injectCodexChunkAsContext(chunk) {
+      try {
+        const item = buildCodexContextItem(chunk);
+
+        // 🔹 TODO: integrate with your existing context injection flow.
+        // For now, log it so we see it works end-to-end:
+        console.log('[Codex] selected for context:', item);
+        alert('Codex code snippet selected for context (see console). Wire this into your context injection API next.');
+      } catch (err) {
+        console.error('Failed to inject Codex chunk as context', err);
+      }
+    }
+
+    function createResultCard(conv) {
+      const card = document.createElement('div');
+      card.className = 'result-card';
+      
+      const date = new Date(conv.created_at).toLocaleDateString();
+      const messages = conv.raw_messages || [];
+      const extracted = conv.extracted_context || {};
+      
+      card.innerHTML = `
+        <div class="result-header">
+          <h3>Conversation from ${date}</h3>
+          <input type="checkbox" onchange="toggleSelection('${conv.id}')" ${selectedConversations.has(conv.id) ? 'checked' : ''}>
+        </div>
+        
+        <div class="result-summary">
+          ${conv.summary || 'No summary available'}
+        </div>
+        
+        <div class="result-meta">
+          <div class="meta-item">📝 ${messages.length} messages</div>
+          ${extracted.files?.length ? `<div class="meta-item">📁 ${extracted.files.length} files</div>` : ''}
+          ${extracted.decisions?.length ? `<div class="meta-item">✅ ${extracted.decisions.length} decisions</div>` : ''}
+        </div>
+        
+        ${extracted.decisions?.length ? `
+          <div class="context-preview">
+            <h4>Key Decisions:</h4>
+            <ul>
+              ${extracted.decisions.slice(0, 3).map(d => `<li>${d}</li>`).join('')}
+            </ul>
+          </div>
+        ` : ''}
+        
+        <div class="action-buttons">
+          <button class="btn btn-small" onclick="viewConversation('${conv.id}')">View Details</button>
+          <button class="btn btn-small btn-secondary" onclick="copyContext('${conv.id}')">Copy Context</button>
+        </div>
+      `;
+      
+      return card;
+    }
+
+    function toggleSelection(conversationId) {
+      if (selectedConversations.has(conversationId)) {
+        selectedConversations.delete(conversationId);
+      } else {
+        selectedConversations.add(conversationId);
+      }
+      
+      if (selectedConversations.size > 0) {
+        showGenerateContextButton();
+      } else {
+        hideGenerateContextButton();
+      }
+    }
+
+    function showGenerateContextButton() {
+      // Add a floating button for generating context from selected conversations
+      if (!document.getElementById('generateBtn')) {
+        const btn = document.createElement('button');
+        btn.id = 'generateBtn';
+        btn.className = 'btn';
+        btn.style.cssText = 'position: fixed; bottom: 30px; right: 30px; z-index: 1000;';
+        btn.textContent = `Generate Context (${selectedConversations.size})`;
+        btn.onclick = generateContext;
+        document.body.appendChild(btn);
+      } else {
+        document.getElementById('generateBtn').textContent = `Generate Context (${selectedConversations.size})`;
+      }
+    }
+
+    function hideGenerateContextButton() {
+      const btn = document.getElementById('generateBtn');
+      if (btn) btn.remove();
+    }
+
+    async function generateContext() {
+      // Allow generating context if we have either conversations or Codex chunks selected
+      if (selectedConversations.size === 0 && (!window.selectedCodexChunks || selectedCodexChunks.size === 0)) {
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/query/summarize', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            conversationIds: Array.from(selectedConversations),
+            projectId: currentProjectId
+          })
+        });
+
+        const data = await response.json();
+        if (!data.success) {
+          console.error('Summarize failed:', data);
+          return;
+        }
+
+        let summaryText = data.summary || '';
+
+        // If we later add selectedCodexChunks, merge them in here:
+        if (window.selectedCodexChunks && selectedCodexChunks.size > 0) {
+          const codexTextParts = Array.from(selectedCodexChunks).map((chunk) => {
+            return `File: ${chunk.filePath} (lines ${chunk.startLine}-${chunk.endLine})\n${chunk.snippet}`;
+          });
+
+          const codexBlock = codexTextParts.join('\n\n');
+
+          summaryText = summaryText
+            ? summaryText + '\n\n---\nCode context from Codex:\n' + codexBlock
+            : 'Code context from Codex:\n' + codexBlock;
+        }
+
+        displayContextSummary(summaryText);
+      } catch (error) {
+        console.error('Failed to generate context:', error);
+      }
+    }
+
+    function displayContextSummary(summary) {
+      const modal = document.createElement('div');
+      modal.style.cssText = `
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.5); display: flex; align-items: center;
+        justify-content: center; z-index: 2000;
+      `;
+      
+      modal.innerHTML = `
+        <div style="background: white; padding: 30px; border-radius: 12px; max-width: 600px; max-height: 80vh; overflow-y: auto;">
+          <h2>Generated Context Summary</h2>
+          <div style="margin: 20px 0;">
+            <h3>Files:</h3>
+            <p>${summary.files.join(', ') || 'None'}</p>
+            
+            <h3>Decisions:</h3>
+            <ul>${summary.decisions.map(d => `<li>${d}</li>`).join('')}</ul>
+            
+            <h3>Requirements:</h3>
+            <ul>${summary.requirements.map(r => `<li>${r}</li>`).join('')}</ul>
+            
+            <h3>Stats:</h3>
+            <p>${summary.conversationCount} conversations, ${summary.messageCount} messages</p>
+          </div>
+          
+          <button class="btn" onclick="copyToClipboard(\`${JSON.stringify(summary)}\`)">Copy to Clipboard</button>
+          <button class="btn btn-secondary" onclick="this.parentElement.parentElement.remove()">Close</button>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Context copied to clipboard!');
+      });
+    }
+
+    async function viewConversation(id) {
+      window.open(`/api/query/conversation/${id}`, '_blank');
+    }
+
+    async function copyContext(id) {
+      try {
+        const response = await fetch(`/api/query/conversation/${id}`);
+        const data = await response.json();
+        
+        if (data.success) {
+          const context = JSON.stringify(data.conversation.extracted_context, null, 2);
+          copyToClipboard(context);
+        }
+      } catch (error) {
+        console.error('Failed to copy context:', error);
+      }
+    }
+  </script>
+</body>
+</html>

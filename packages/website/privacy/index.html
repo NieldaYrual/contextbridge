@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - ContextBridge</title>
+  <meta name="description" content="ContextBridge Privacy Policy - Learn how we handle your data.">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="nav-logo">
+      <img src="/logo.svg" alt="ContextBridge" width="32" height="32">
+      <span>ContextBridge</span>
+    </a>
+    <div class="nav-links">
+      <a href="/how-to-use">How to Use</a>
+      <a href="/privacy">Privacy</a>
+    </div>
+  </nav>
+
+  <main class="privacy-content">
+    <h1>Privacy Policy</h1>
+    <p class="last-updated">Last updated: April 16, 2026</p>
+
+    <p>
+      ContextBridge is committed to protecting your privacy. This policy explains how we collect, 
+      use, and safeguard your data when you use our Chrome extension, VS Code extension, and related services.
+    </p>
+
+    <h2>Account Information</h2>
+    <p>When you create a ContextBridge account, we collect:</p>
+    <ul>
+      <li><strong>Email address:</strong> Used for account identification, login, and important service communications</li>
+      <li><strong>Name:</strong> Optional display name for your account</li>
+      <li><strong>Password:</strong> Securely hashed using industry-standard bcrypt algorithm; we never store plaintext passwords</li>
+    </ul>
+    <p>
+      We use secure JSON Web Tokens (JWT) for session management. Access tokens are short-lived (15 minutes) 
+      and refresh tokens are stored securely and can be revoked at any time.
+    </p>
+
+    <h2>Data We Collect</h2>
+    <p>ContextBridge collects the following data only when explicitly triggered by you via the extension interface:</p>
+    <ul>
+      <li><strong>Conversation text and metadata</strong> from AI platforms (Claude.ai and ChatGPT)</li>
+      <li><strong>Code files</strong> synced from your local workspace via the VS Code extension</li>
+    </ul>
+    <p>Important transparency commitments:</p>
+    <ul>
+      <li>We do not scrape data in the background</li>
+      <li>We do not collect data without your visible interaction (clicking the "Capture" button or the status widget)</li>
+      <li>All data capture is transparently indicated by a status widget on your screen</li>
+    </ul>
+
+    <h2>Information We Collect</h2>
+    <p>When you initiate a "Capture" or "Sync" action, the extension collects the following specific data from the active browser tab:</p>
+    <ul>
+      <li><strong>Conversation Content:</strong> The text of messages sent by you and the AI provider</li>
+      <li><strong>Metadata:</strong> Timestamps, conversation titles, and unique identifiers (e.g., UUIDs) to prevent duplicate entries</li>
+      <li><strong>Files & Artifacts:</strong> Code snippets, text files, or PDFs referenced within the conversation that you have access to</li>
+      <li><strong>Project Context:</strong> The name and ID of the specific project or workspace you are viewing</li>
+    </ul>
+
+    <h2>How We Use Your Data</h2>
+    <p>Your data is used solely for the purpose of providing the ContextBridge service:</p>
+    <ul>
+      <li>Stored securely in your private, encrypted database</li>
+      <li>Indexed to enable semantic search across your conversations</li>
+      <li>Used exclusively for search and context retrieval by you, the data owner</li>
+    </ul>
+    <p>
+      We do not use your conversation data for training public AI models. We do not sell, trade, 
+      or rent your personal identification information to others.
+    </p>
+
+    <h2>Authentication & Security</h2>
+    <p>We implement robust security measures to protect your account:</p>
+    <ul>
+      <li><strong>Password Security:</strong> All passwords are hashed using bcrypt with a cost factor of 12</li>
+      <li><strong>Session Management:</strong> We use short-lived JWT access tokens (15 minutes) with secure refresh token rotation</li>
+      <li><strong>Email Verification:</strong> New accounts require email verification before access is granted</li>
+      <li><strong>Secure Token Storage:</strong> Refresh tokens are hashed before storage; access tokens are never stored server-side</li>
+    </ul>
+
+    <h2>Data Sharing</h2>
+    <p>We take your privacy seriously:</p>
+    <ul>
+      <li>We do <strong>not</strong> sell, rent, or share your data with third parties, except as necessary to provide the service (e.g., cloud hosting providers) who are bound by confidentiality agreements</li>
+      <li>Your data is accessible only to you</li>
+      <li>We do not use your conversation data to train AI models</li>
+      <li>We will never sell your conversation history to advertisers or data brokers</li>
+    </ul>
+
+    <h2>Data Security</h2>
+    <p>
+      All data is transmitted securely using industry-standard Transport Layer Security (TLS/SSL) 
+      and HTTPS encryption. Your conversation data is stored in isolated, encrypted databases 
+      with access controls ensuring only you can retrieve your data.
+    </p>
+
+    <h2>Data Retention</h2>
+    <p>
+      Your data is retained for as long as you maintain an active ContextBridge account. 
+      You may request deletion of your data at any time by contacting us. Upon account deletion,
+      all associated data including conversations, files, and authentication tokens are permanently removed.
+    </p>
+
+    <h2>Your Rights</h2>
+    <p>You have the right to:</p>
+    <ul>
+      <li>Access all data we have stored about you</li>
+      <li>Request correction of inaccurate data</li>
+      <li>Request deletion of your data and account</li>
+      <li>Export your data in a portable format</li>
+      <li>Revoke all active sessions by resetting your password</li>
+    </ul>
+
+    <h2>Chrome Extension Permissions</h2>
+    <p>
+      The ContextBridge extension requires permissions to access claude.ai and chatgpt.com 
+      to provide the conversation capture feature. The extension:
+    </p>
+    <ul>
+      <li>Only captures data when you explicitly initiate a capture action</li>
+      <li>Displays a visible status indicator on supported pages for transparency</li>
+      <li>Does not automatically scrape or collect data in the background</li>
+      <li>Stores authentication tokens securely in Chrome's sync storage</li>
+    </ul>
+
+    <h2>VS Code Extension</h2>
+    <p>
+      The ContextBridge VS Code extension syncs your local code files to enable unified search. The extension:
+    </p>
+    <ul>
+      <li>Only syncs files matching your configured patterns</li>
+      <li>Stores authentication tokens securely using VS Code's SecretStorage API</li>
+      <li>Requires explicit login before any data is transmitted</li>
+    </ul>
+
+    <h2>Analytics & Advertising</h2>
+    <p>
+      We use Google Analytics (GA4) and Google Ads conversion tracking on our website 
+      (ctxbridge.io) to understand how visitors interact with our pages and to measure 
+      the effectiveness of our advertising. This may involve:
+    </p>
+    <ul>
+      <li>Collection of anonymized usage data via cookies and similar technologies</li>
+      <li>Hashing and sharing of first-party data (such as email addresses you provide) 
+      with Google for ads measurement purposes, as part of Google's Enhanced Conversions 
+      feature</li>
+      <li>Use of the Google Click Identifier (GCLID) to attribute conversions to ad clicks</li>
+    </ul>
+    <p>
+      This tracking applies to the website only — not to data captured through the 
+      Chrome or VS Code extensions. You can opt out of Google Analytics tracking via 
+      <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">
+      Google's opt-out tool</a>.
+    </p>
+
+    <h2>Contact Us</h2>
+    <p>
+      If you have questions about this Privacy Policy or your data, please contact us at 
+      <a href="mailto:legal@ctxbridge.io">legal@ctxbridge.io</a>.
+    </p>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="/logo.svg" alt="ContextBridge" width="24" height="24">
+        <span>ContextBridge</span>
+      </div>
+      <div class="footer-links">
+        <a href="/how-to-use">How to Use</a>
+        <a href="/install/editor">VS Code / Cursor</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="mailto:legal@ctxbridge.io">Contact</a>
+      </div>
+      <p class="footer-copy">&copy; 2025 ContextBridge. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

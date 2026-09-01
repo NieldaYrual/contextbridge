@@ -1,0 +1,11 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left node -->
+  <circle cx="14" cy="24" r="8" fill="#8B5CF6"/>
+  <!-- Right node -->
+  <circle cx="34" cy="24" r="8" fill="#8B5CF6"/>
+  <!-- Bridge/connection line -->
+  <rect x="14" y="21" width="20" height="6" rx="3" fill="#8B5CF6"/>
+  <!-- Inner highlights for depth -->
+  <circle cx="14" cy="24" r="4" fill="#A78BFA" opacity="0.6"/>
+  <circle cx="34" cy="24" r="4" fill="#A78BFA" opacity="0.6"/>
+</svg>

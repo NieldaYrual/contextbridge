@@ -1,0 +1,127 @@
+{
+  "name": "contextbridge-codex",
+  "displayName": "ContextBridge Codex",
+  "description": "Sync your local code with ContextBridge to carry your code context across every AI chat, automatically.",
+  "version": "0.1.1",
+  "publisher": "contextbridge",
+  "license": "MIT",
+  "homepage": "https://ctxbridge.io",
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#0a0a0a",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other",
+    "Machine Learning"
+  ],
+  "keywords": [
+    "ai",
+    "context",
+    "memory",
+    "claude",
+    "chatgpt",
+    "gemini",
+    "copilot",
+    "code-sync",
+    "contextbridge"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "contextbridge.login",
+        "title": "ContextBridge: Sign In"
+      },
+      {
+        "command": "contextbridge.logout",
+        "title": "ContextBridge: Sign Out"
+      },
+      {
+        "command": "contextbridge.selectProject",
+        "title": "ContextBridge: Select Project"
+      },
+      {
+        "command": "contextbridge.syncCurrentFile",
+        "title": "ContextBridge: Sync Current File"
+      },
+      {
+        "command": "contextbridge.syncWorkspace",
+        "title": "ContextBridge: Sync Entire Workspace"
+      }
+    ],
+    "configuration": {
+      "title": "ContextBridge",
+      "properties": {
+        "contextbridge.projectIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "ContextBridge Project UUIDs to sync files to"
+        },
+        "contextbridge.apiUrl": {
+          "type": "string",
+          "default": "https://api.ctxbridge.io/api/codex/upsert-file",
+          "description": "API Endpoint for syncing code"
+        },
+        "contextbridge.includedPatterns": {
+          "type": "array",
+          "default": [
+            "src/**/*",
+            "packages/*/src/**/*",
+            "packages/*/*.{ts,js,html,css}",
+            "backend/src/**/*",
+            "frontend/src/**/*",
+            "app/**/*",
+            "lib/**/*",
+            "*.{ts,js,py,go,rs,java,c,cpp,h,hpp,md,json}"
+          ],
+          "description": "Glob patterns for 'Smart Sync' (e.g., src/**/*)"
+        },
+        "contextbridge.excludePatterns": {
+          "type": "array",
+          "default": [
+            "**/node_modules/**",
+            "**/dist/**",
+            "**/build/**",
+            "**/out/**",
+            "**/.git/**",
+            "**/.next/**",
+            "**/.vscode/**",
+            "**/coverage/**",
+            "**/test-results/**"
+          ],
+          "description": "Glob patterns to always exclude"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "pnpm run compile && pnpm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "~18.19.130",
+    "@types/vscode": "^1.116.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.57.1",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@types/node-fetch": "^2.6.13",
+    "node-fetch": "^2.7.0"
+  }
+}

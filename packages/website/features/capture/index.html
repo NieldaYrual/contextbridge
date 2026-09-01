@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17943315500"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17943315500');
+    gtag('config', 'G-MFJSRGFTY5');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capture Conversations - ContextBridge</title>
+  <meta name="description" content="Save every AI conversation from Claude, ChatGPT, Gemini & Grok. Never lose valuable context again with ContextBridge's one-click capture.">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="icon" href="../../logo.svg" type="image/svg+xml">
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="nav-logo">
+      <img src="../../logo.svg" alt="ContextBridge" width="32" height="32">
+      <span>ContextBridge</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/how-to-use">How to Use</a>
+      <a href="/privacy">Privacy</a>
+    </div>
+  </nav>
+
+  <section class="feature-hero">
+    <div class="feature-hero-icon">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+    </div>
+    <h1>Capture Conversations</h1>
+    <p class="feature-hero-subtitle">Every insight, preserved. Every thread, retrievable. Every message, portable.</p>
+  </section>
+
+  <section class="feature-section">
+    <div class="feature-section-inner">
+      <div class="feature-section-header">
+        <span class="feature-section-label">For users</span>
+        <h2>Save your best AI work!</h2>
+      </div>
+      <p class="feature-section-lead">
+        Save your breakthrough conversations, refined ideas, and project work from any AI platform with one click. Find exactly what you need instantly — no more digging through endless chat history.
+      </p>
+      <div class="feature-benefits">
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <div>
+            <h3>One-click capture</h3>
+            <p>Save any conversation from Claude.ai, ChatGPT, Gemini, or Grok with a single click. No copy-pasting, no manual exports — just click and it's saved.</p>
+          </div>
+        </div>
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Works across all major platforms</h3>
+            <p>Claude.ai, ChatGPT, Gemini, and Grok — your conversations are captured regardless of which AI you were using when the insight happened. Retrieve your work across multiple LLMs.</p>
+          </div>
+        </div>
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Full fidelity storage</h3>
+            <p>Every message, every code block, every file, every nuance is preserved exactly as it appeared, and searchable. Not a summary — the full conversation and its attachments, indexed and ready.</p>
+          </div>
+        </div>
+        <div class="feature-benefit">
+          <div class="feature-benefit-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Your data, your control</h3>
+            <p>Conversations are stored securely under your account. Your privacy preserved. You choose what to save and what to leave behind. Organize them by project, search across them instantly, and access them from any device.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section feature-section-dark">
+    <div class="feature-section-inner">
+      <div class="feature-section-header">
+        <span class="feature-section-label">For developers — ask <a href="/cdn-cgi/l/email-protection#70191e161f301304081202191417155e191f" class="feature-dev-link"><span class="__cf_email__" data-cfemail="6d04030b022d0e19150f1f04090a08430402">[email&#160;protected]</span></a> for APIs</span>
+        <h2>How capture works under the hood</h2>
+      </div>
+      <p class="feature-section-lead">
+        The Chrome extension intercepts outgoing API calls at the network layer using a fetch API proxy injected into the page context. This approach requires no DOM scraping and is resilient to UI changes on AI platforms.
+      </p>
+      <div class="feature-tech-grid">
+        <div class="feature-tech-card">
+          <h4>Fetch interception</h4>
+          <p>The extension injects a script into the page that wraps the native <code>fetch</code> API. Matched endpoints (e.g. Claude's <code>/api/append_message</code>, OpenAI's <code>/backend-api/conversation</code>) are cloned and forwarded to the ContextBridge backend without interfering with the original request.</p>
+        </div>
+        <div class="feature-tech-card">
+          <h4>Platform-specific parsers</h4>
+          <p>Each AI platform returns conversation data in a different schema. ContextBridge normalizes these into a unified conversation schema in Supabase (PostgreSQL), preserving role, content, timestamps, and platform metadata.</p>
+        </div>
+        <div class="feature-tech-card">
+          <h4>Embedding pipeline</h4>
+          <p>On ingestion, messages are chunked and passed through a 1536-dimension model, stored in a <code>pgvector</code> column. Function-level semantic chunking via a semantic parser is used for code content to avoid splitting function bodies across chunk boundaries.</p>
+        </div>
+        <div class="feature-tech-card">
+          <h4>VS Code sync</h4>
+          <p>The VS Code extension watches your workspace for file changes and syncs modified files to Supabase via the ContextBridge API. Code files are chunked at the function level using a semantic parser, ensuring embeddings represent meaningful semantic units rather than arbitrary fixed-size windows.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section feature-section-vision">
+    <div class="feature-section-inner feature-section-inner-narrow">
+      <span class="feature-section-label">What's ahead</span>
+      <h2>A broader knowledge base</h2>
+      <p>
+        Today, ContextBridge captures from the AI platforms you use most. The longer-term vision is broader: any source of knowledge you own — documents, PDFs, emails, notes, web pages, meeting transcripts — will become part of your personal context layer. The more sources you connect, the richer the context available to every future AI conversation. The goal is a living knowledge base that grows with you, not a static archive.
+      </p>
+    </div>
+  </section>
+
+  <section class="feature-cta">
+    <h2>Start capturing today</h2>
+    <p>Install the Chrome extension and never lose a conversation again.</p>
+    <div class="hero-cta">
+      <a href="/install/chrome" class="btn btn-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/>
+        </svg>
+        Add to Chrome
+      </a>
+      <div class="editor-dropdown">
+        <a href="/install/editor" class="btn btn-secondary editor-dropdown-trigger">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v8M8 12h8"/>
+          </svg>
+          Connect your editor
+          <svg class="editor-dropdown-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </a>
+        <div class="editor-dropdown-menu" role="menu">
+          <a href="https://marketplace.visualstudio.com/items?itemName=contextbridge.contextbridge-codex" class="editor-dropdown-item" role="menuitem">
+            <span class="editor-dropdown-item-name">VS Code</span>
+            <span class="editor-dropdown-item-note">Install from Marketplace</span>
+          </a>
+          <a href="https://open-vsx.org/extension/contextbridge/contextbridge-codex" class="editor-dropdown-item" role="menuitem">
+            <span class="editor-dropdown-item-name">Cursor</span>
+            <span class="editor-dropdown-item-note">Install from Open VSX</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="hiring-bar">
+    We're building the memory layer for AI work and hiring exceptional talent: send your resume to <a href="mailto:info@ctxbridge.io">info@ctxbridge.io</a>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="../../logo.svg" alt="ContextBridge" width="24" height="24">
+        <span>ContextBridge</span>
+      </div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/how-to-use">How to Use</a>
+        <a href="/features/capture">Capture Conversations</a>
+        <a href="/features/search">Semantic Search</a>
+        <a href="/features/inject">Context Injection</a>
+        <a href="/install/editor">VS Code / Cursor</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/cdn-cgi/l/email-protection#177b7270767b5

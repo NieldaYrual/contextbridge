@@ -1,0 +1,3 @@
+ALTER TABLE cb_github_repos
+  ADD COLUMN IF NOT EXISTS sync_files_total INTEGER DEFAULT NULL,
+  ADD COLUMN IF NOT EXISTS sync_files_done  INTEGER DEFAULT 0;

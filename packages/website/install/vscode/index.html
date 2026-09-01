@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17943315500"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17943315500');
+    gtag('config', 'G-MFJSRGFTY5');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Install VS Code Extension - ContextBridge</title>
+  <meta name="description" content="Download and install the ContextBridge VS Code extension to sync your code context.">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <style>
+    .install-page {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+    .install-page h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .install-page .subtitle {
+      color: var(--color-text-muted);
+      margin-bottom: 2rem;
+    }
+    .download-box {
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+    .download-box .btn {
+      margin-bottom: 0.75rem;
+    }
+    .download-box .file-info {
+      font-size: 0.8125rem;
+      color: var(--color-text-muted);
+    }
+    .steps {
+      counter-reset: step;
+    }
+    .step {
+      position: relative;
+      padding-left: 3rem;
+      padding-bottom: 1.5rem;
+      border-left: 1px solid var(--color-border);
+      margin-left: 0.75rem;
+    }
+    .step:last-child {
+      border-left: none;
+      padding-bottom: 0;
+    }
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: -0.75rem;
+      top: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: var(--color-primary);
+      color: white;
+      border-radius: 50%;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .step h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .step p {
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+      margin-bottom: 0.5rem;
+    }
+    .step code {
+      display: inline-block;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      padding: 0.125rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+      font-size: 0.8125rem;
+      color: var(--color-primary-hover);
+    }
+    .platform-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .platform-tab {
+      padding: 0.5rem 1rem;
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .platform-tab:hover {
+      border-color: var(--color-primary);
+      color: var(--color-text);
+    }
+    .platform-tab.active {
+      background: var(--color-primary-glow);
+      border-color: var(--color-primary);
+      color: var(--color-primary-hover);
+    }
+    .platform-content {
+      display: none;
+    }
+    .platform-content.active {
+      display: block;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: var(--color-text);
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="nav-logo">
+      <img src="/logo.svg" alt="ContextBridge" width="32" height="32">
+      <span>ContextBridge</span>
+    </a>
+    <div class="nav-links">
+      <a href="/how-to-use">How to Use</a>
+      <a href="/privacy">Privacy</a>
+    </div>
+  </nav>
+
+  <main class="install-page">
+    <a href="/" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back to home
+    </a>
+
+    <h1>Install VS Code Extension</h1>
+    <p class="subtitle">Sync your code context with ContextBridge</p>
+
+    <div class="download-box">
+      <a href="https://api.ctxbridge.io/download/vscode" class="btn btn-primary" download>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download Extension
+      </a>
+      <p class="file-info">contextbridge-codex-0.0.1.vsix</p>
+    </div>
+
+    <div class="platform-tabs">
+      <button class="platform-tab active" data-platform="windows">Windows</button>
+      <button class="platform-tab" data-platform="mac">macOS</button>
+    </div>
+
+    <div class="platform-content active" data-platform="windows">
+      <div class="steps">
+        <div class="step">
+          <h3>Open VS Code</h3>
+          <p>Launch Visual Studio Code on your computer.</p>
+        </div>
+        <div class="step">
+          <h3>Open Extensions Panel</h3>
+          <p>Press <code>Ctrl+Shift+X</code> or click the Extensions icon in the sidebar.</p>
+        </div>
+        <div class="step">
+          <h3>Install from VSIX</h3>
+          <p>Click the <code>···</code> menu at the top of the Extensions panel, then select <strong>Install from VSIX...</strong></p>
+        </div>
+        <div class="step">
+          <h3>Select the Downloaded File</h3>
+          <p>Navigate to your Downloads folder and select <code>contextbridge-codex-0.0.1.vsix</code></p>
+        </div>
+        <div class="step">
+          <h3>Configure &amp; Sync</h3>
+          <p>Press <code>Ctrl+Shift+P</code> and type <strong>ContextBridge: Sign In</strong> to connect your account, then select a project to start syncing.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="platform-content" data-platform="mac">
+      <div class="steps">
+        <div class="step">
+          <h3>Open VS Code</h3>
+          <p>Launch Visual Studio Code on your Mac.</p>
+        </div>
+        <div class="step">
+          <h3>Open Extensions Panel</h3>
+          <p>Press <code>Cmd+Shift+X</code> or click the Extensions icon in the sidebar.</p>
+        </div>
+        <div class="step">
+          <h3>Install from VSIX</h3>
+          <p>Click the <code>···</code> menu at the top of the Extensions panel, then select <strong>Install from VSIX...</strong></p>
+        </div>
+        <div class="step">
+          <h3>Select the Downloaded File</h3>
+          <p>Navigate to your Downloads folder and select <code>contextbridge-codex-0.0.1.vsix</code></p>
+        </div>
+        <div class="step">
+          <h3>Configure &amp; Sync</h3>
+          <p>Press <code>Cmd+Shift+P</code> and type <strong>ContextBridge: Sign In</strong> to connect your account, then select a project to start syncing.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="/logo.svg" alt="ContextBridge" width="24" height="24">
+        <span>ContextBridge</span>
+      </div>
+      <div class="footer-links">
+        <a href="/how-to-use">How to Use</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="mailto:legal@ctxbridge.io">Contact</a>
+      </div>
+      <p class="footer-copy">&copy; 2025 ContextBridge. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Platform tab switching
+    document.querySelectorAll('.platform-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const platform = tab.dataset.platform;
+        
+        // Update tabs
+        document.querySelectorAll('.platform-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Update content
+        document.querySelectorAll('.platform-content').forEach(c => c.classList.remove('active'));
+        document.querySelector(`.platform-content[data-platform="${platform}"]`).classList.add('active');
+      });
+    });
+
+    // Auto-detect platform
+    if (navigator.platform.toLowerCase().includes('mac')) {
+      document.querySelector('.platform-tab[data-platform="mac"]').click();
+    }
+  </script>
+</body>
+</html>

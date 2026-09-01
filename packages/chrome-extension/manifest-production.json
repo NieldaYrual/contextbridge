@@ -1,0 +1,74 @@
+{
+  "manifest_version": 3,
+  "name": "ContextBridge",
+  "version": "1.3.3",
+  "description": "Capture and inject context for Claude and ChatGPT conversations",
+  "permissions": [
+    "tabs",
+    "alarms",
+    "activeTab",
+    "storage",
+    "notifications",
+    "scripting",
+    "downloads"
+  ],
+  "host_permissions": [
+    "*://claude.ai/*",
+    "*://chat.openai.com/*",
+    "*://chatgpt.com/*",
+    "*://x.com/*",
+    "*://grok.com/*",
+    "*://x.ai/*",
+    "*://gemini.google.com/*",
+    "https://api.ctxbridge.io/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://api.ctxbridge.io/*",
+      "https://ctxbridge.io/*"
+    ]
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+  {
+    "matches": [
+      "https://claude.ai/*",
+      "https://*.claude.ai/*",
+      "https://chat.openai.com/*",
+      "https://chatgpt.com/*",
+      "https://x.com/*",
+      "https://grok.com/*",
+      "https://*.grok.com/*",
+      "https://x.ai/*",
+      "https://gemini.google.com/*"
+    ],
+    "js": ["content.js", "content-universal.js", "status-widget.js"],
+    "run_at": "document_start"
+  },
+  {
+    "matches": [
+      "https://api.ctxbridge.io/*"
+    ],
+    "js": ["content.js"],
+    "run_at": "document_start"
+  }
+  ],
+  "action": {
+    "default_title": "ContextBridge - Capture AI Conversations"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["progress.html", "progress.js", "injected_interceptor.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "icons": {
+    "128": "icons/icon128.png"
+  }
+}
